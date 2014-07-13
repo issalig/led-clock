@@ -2,7 +2,7 @@
 
  Led Matrix Clock
  Inspired by a Word Clock
- by Ismael Salvador (issalig@yahoo.es)
+ by Ismael Salvador
  25/05/2014
  
  */
@@ -358,8 +358,7 @@ void loop() {
     draw_matrix_595(500);
   else if (USE_MATRIX_7219){
     //IF (ANODE_V3)
-    if (csecond%2)
-      trans_matrix();
+    trans_matrix();
     draw_matrix_7219(500);    
   }
   
