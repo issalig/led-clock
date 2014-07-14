@@ -1,8 +1,15 @@
+/*
+  file: button.ino
+  description: button functions
+  date: 25/05/2014
+  author: Ismael Salvador
+*/
+
 void initButton(int num){
    pinMode(num, INPUT_PULLUP);
 }
 
-int readButton(int num){
+int readAButton(int num){
   int button = 1; 
   if (analogRead(num) > 16) 
       button = 0;
