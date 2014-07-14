@@ -1,12 +1,15 @@
-  /*
-
- Led Matrix Clock
- Inspired by a Word Clock
- by Ismael Salvador
- 25/05/2014
+/*
+  ========================
+  Led Matrix Clock
+  Inspired by a Word Clock
+  ========================
+  
+  file: number_clock2.ino
+  description: led-clock
+  date: 25/05/2014
+  author: Ismael Salvador
+*/
  
- */
-
 //#include <Time.h>
 #include "DHT.h"
 #include "LedControl.h"
@@ -40,10 +43,12 @@ RTC_Millis rtc;
 #define USE_DHT11       1
 #define DHTPIN          6
 #define DHTTYPE         DHT11 
+
 DHT dht(DHTPIN, DHTTYPE);
 
 #define USE_BUTTONS 1
 
+//number clock
 //leds are numbered sequentially from topleft
 const byte H[]={
 //  11,0,1,2,3,4,5,6,7,8,9,10}; //hours from 1-12
@@ -98,7 +103,10 @@ LedControl lc=LedControl(dataIn7219,clk7219,load7219,1);
 //matrix buffer
 char raster[MATRIX_ROWS][MATRIX_COLS];
 
+//time
 int cyear, cmonth, cday, chour, cminute, csecond;
+
+//weather
 double humidity, temperature, dew_point;
 
 void set_led_hour(int hour){
