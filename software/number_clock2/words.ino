@@ -268,7 +268,8 @@ const  byte whour2[]={
   B00000000
 };
 
-
+//word clock gives time in "human" way
+//using hours and reference to the quarter
 
 void set_led_word_hour(byte h){
   int i;
@@ -293,3 +294,12 @@ void set_led_word_quarter(byte q){
     set_or_row(i, wquarter[i+(wq*MATRIX_COLS)]);
 }
 
+void set_led_word_clock(){ 
+    //show next hour if minutes over 37
+    if (cminute > 37)
+      set_led_word_hour(chour+1);
+    else 
+      set_led_word_hour(chour);
+      
+    set_led_word_quarter(cminute);
+}

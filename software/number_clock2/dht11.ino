@@ -44,6 +44,7 @@ float calculate_humidex(float temperature,float humidity) {
 //returns humidex level 0 is good, 5 is bad
 int get_humidex_level(float humidex)
 {
+  int level;
   if ((humidex >= 21 )&&(humidex < 27)){
     //No discomfort
     level=0;

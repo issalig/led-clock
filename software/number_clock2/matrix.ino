@@ -5,6 +5,35 @@
   author: Ismael Salvador
 */
 
+/* init pins connected to matrix */
+void init_matrix_pins(){
+if (USE_COLS_PINS){
+    //pins for rows
+    for (int i = 0; i < MATRIX_COLS; i++)
+      pinMode(colPins[i], OUTPUT);
+}
+
+if (USE_COLS_595){
+    //pins for 595
+    pinMode(latchPin595, OUTPUT);
+    pinMode(clockPin595, OUTPUT);
+    pinMode(dataPin595,  OUTPUT);
+}
+  
+if (USE_ROWS_4017){
+    //pins for rows managed by 4017  
+    pinMode(clockPin4017, OUTPUT);
+    pinMode(resetPin4017, OUTPUT);
+    reset_4017();
+}
+  
+if (USE_MATRIX_7219){
+    lc.shutdown(0,false); //wake up from saving mode
+    lc.setIntensity(0,8); //medium intensity
+    lc.clearDisplay(0);   //clear display
+}
+}
+
 /*
 reset 4017
 */
@@ -98,13 +127,13 @@ void square_animation(){
   fill_matrix(0);
     fill_square(radius, 1);
 
-      draw_matrix_595(300);
+      draw_matrix_4017_595(300);
 
   }
   for(int radius=2;radius>=0;radius--){    
   fill_matrix(1);
     fill_square(radius, 0);
-      draw_matrix_595(300);
+      draw_matrix_4017_595(300);
 
   }
   }
@@ -259,4 +288,34 @@ void draw_matrix_7219(int wait){
 
 }
 
+  /*
+   //switch on rows ascending
+   for (y = 0; y < MATRIX_ROWS; y++) {
+   fill_row(y,1);
+   draw_matrix(100);
+   }*/
 
+  //switch off rows descending
+  /*
+   for (y = MATRIX_ROWS-1; y>=0; y--) {  
+   fill_row(y,0);
+   draw_matrix(100);
+   }
+   
+   for (y = MATRIX_ROWS-1; y>=0; y--) {  
+   random_matrix();      
+   draw_matrix(200);
+   }
+   */
+   
+void draw_matrix(int wait){
+  if (USE_COLS_PINS)
+    draw_matrix_4017_port(500);
+  else if (USE_COLS_595)
+    draw_matrix_4017_595(500);
+  else if (USE_MATRIX_7219){
+    if (USE_7219_C_ANODE)
+      trans_matrix();
+    draw_matrix_7219(500);    
+  }
+}
