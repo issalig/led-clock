@@ -1,3 +1,10 @@
+/*
+  file: moon.ino
+  description: moon phase functions
+  date: 25/05/2014
+  author: Ismael Salvador
+*/
+
 //new; 0% illuminated               ** 0
 //Waxing crescent; 25% illuminated     1
 //First quarter; 50% illuminated    ** 2
