@@ -1,4 +1,11 @@
 /*
+  file: matrix.ino
+  description: led matrix access for different methods
+  date: 25/05/2014
+  author: Ismael Salvador
+*/
+
+/*
 reset 4017
 */
 void reset_4017(){
@@ -71,7 +78,7 @@ void trans_matrix(){
 }
 
 /*
-square
+fill a centered square
 */
 void fill_square(int radius, int val){
   int x,y;
@@ -105,7 +112,7 @@ void square_animation(){
 }
 
 /*
-makes random matrix
+fill random matrix
 */
 void random_matrix(){
   int x,y;
@@ -132,9 +139,9 @@ void set_led_number(int number){
 
 
 /*
- draws matrix fora period of time
+ draws matrix for a period of time using 4017 for rows and cols in digital ports
 */
-void draw_matrix(int wait){
+void draw_matrix_4017_port(int wait){
   int x,y;
   unsigned long time1;
   
@@ -178,9 +185,9 @@ void shiftOut2(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder, int val, uin
 }
 
 /*
- draws matrix for a period of time using 595 for columns
+ draws matrix for a period of time using 4017 for rows and 595 for columns
 */
-void draw_matrix_595(int wait){
+void draw_matrix_4017_595(int wait){
   int x,y;
   unsigned long time1;
   
@@ -230,7 +237,7 @@ void draw_matrix_595(int wait){
 }
 
 /*
- draws matrix for a period of time
+ draws matrix for a period of time using a 7219
 */
 void draw_matrix_7219(int wait){
   int x,y;
