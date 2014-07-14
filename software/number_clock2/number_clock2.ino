@@ -193,7 +193,7 @@ void setup() {
   if (USE_COLS_PINS){
     //pins for rows
     for (int i = 0; i < MATRIX_COLS; i++)
-    pinMode(colPins[i], OUTPUT);
+      pinMode(colPins[i], OUTPUT);
   }
 
   if (USE_COLS_595){
@@ -348,6 +348,8 @@ void loop() {
 
   //write matrix
   if (WORD_CLOCK){
+    //call word_clock()
+    
     //clean matrix
     fill_matrix(0);
     //show next hour if minutes over 37
