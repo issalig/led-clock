@@ -1,4 +1,12 @@
-//words led
+/*
+  file: words.ino
+  description: led masks for time words
+  date: 25/05/2014
+  author: Ismael Salvador
+*/
+
+//MODIFY this file according to your word mask
+
 //led order in raster is reversed in rows
 
 const  byte whour[]={    
@@ -272,11 +280,11 @@ void set_led_word_hour(byte h){
 }
 
 void set_led_word_quarter(byte q){
-    //suffix  
-    //52.7,7.5   o'clock
-    //8,22.5     quarter to
-    //22.5,37.5  half
-    //37.5-52.5  quarter past
+
+  //52.7,7.5   o'clock
+  //8,22.5     quarter past
+  //22.5,37.5  half
+  //37.5-52.5  quarter to
   
   int i;
   byte wq=((q+7)/15)%4;
