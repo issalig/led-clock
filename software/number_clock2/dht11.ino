@@ -1,3 +1,10 @@
+/*
+  file: dht11.ino
+  description: humidity functions
+  date: 25/05/2014
+  author: Ismael Salvador
+*/
+
 //http://en.wikipedia.org/wiki/Dew_point
 
 // dewPoint function NOAA
@@ -37,33 +44,22 @@ float calculate_humidex(float temperature,float humidity) {
 //returns humidex level 0 is good, 5 is bad
 int get_humidex_level(float humidex)
 {
-  if ((humidex >= 21 )&&(humidex < 27))
-  {
+  if ((humidex >= 21 )&&(humidex < 27)){
     //No discomfort
     level=0;
-  }
-  else if ((humidex >= 27 )&&(humidex < 35))
-  {
+  }else if ((humidex >= 27 )&&(humidex < 35)){
     //Some discomfort
     level=1;
-  }
-  else if ((humidex >= 35 )&&(humidex < 40))
-  {
+  }else if ((humidex >= 35 )&&(humidex < 40)){
     //Great discomfort
     level=2;
-  }
-  else if ((humidex >= 40 )&&(humidex < 46))
-  {
+  }else if ((humidex >= 40 )&&(humidex < 46)){
     //Health risk
     level=3;
-  }
-  else if ((humidex >= 46 )&&(humidex < 54))
-  {
+  }else if ((humidex >= 46 )&&(humidex < 54)){
     //Great health risk
     level=4;
-  }
-  else if ((humidex >= 54 ))
-  {
+  }else if ((humidex >= 54 )){
     //Heat stroke danger
     level=5;
   }
