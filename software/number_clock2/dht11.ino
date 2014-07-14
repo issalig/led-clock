@@ -24,3 +24,49 @@ double dewPointFast(double celsius, double humidity){
   double Td = (b * temp) / (a - temp);
   return Td;
 }
+
+//http://en.wikipedia.org/wiki/Humidex
+float calculate_humidex(float temperature,float humidity) {
+  float e;
+
+  e = (6.112 * pow(10,(7.5 * temperature/(237.7 + temperature))) * humidity/100); //vapor pressure
+  float humidex = temperature + 0.55555555 * (e - 10.0); //humidex
+  return humidex;
+}
+
+//returns humidex level 0 is good, 5 is bad
+int get_humidex_level(float humidex)
+{
+  if ((humidex >= 21 )&&(humidex < 27))
+  {
+    //No discomfort
+    level=0;
+  }
+  else if ((humidex >= 27 )&&(humidex < 35))
+  {
+    //Some discomfort
+    level=1;
+  }
+  else if ((humidex >= 35 )&&(humidex < 40))
+  {
+    //Great discomfort
+    level=2;
+  }
+  else if ((humidex >= 40 )&&(humidex < 46))
+  {
+    //Health risk
+    level=3;
+  }
+  else if ((humidex >= 46 )&&(humidex < 54))
+  {
+    //Great health risk
+    level=4;
+  }
+  else if ((humidex >= 54 ))
+  {
+    //Heat stroke danger
+    level=5;
+  }
+  
+  return level;
+}
