@@ -3,9 +3,9 @@ led-clock
 
 Clock adventures with a led matrix.
 
-After thinking about the simplest way to build a word clock, I experimented with hand-soldered led matrices, 74HC595 and 7219 among others to end up with the mighty 7219 and 8x8 led matrices.
+After thinking about the simplest way to build a word clock I experimented with hand-soldered led matrices, 74HC595, 7219 and others to end up with the mighty 7219 and 8x8 led matrices.
 
-7219 works with common cathode displays but a nice workaround to make it work with common anode is to interchange rows by cols (transposing the matrix) and do the same (transposing it again) from software. Anyway the PCB supports both c.c. and c.a. as well as 3mm matrices.
+7219 works with common cathode displays but a nice workaround to make it work with common anode matrices is to interchange rows by cols (transposing the matrix) and do the same (transposing it again) from software. Anyway, the PCB has been designed to support both c.c. and c.a. as well as 3mm matrices.
 
 In order to make it richer, led-clock supports a humidity sensor and a pressure sensor. Additional sensors are also supported via I2C or SPI.
 
@@ -25,12 +25,12 @@ In order to make it richer, led-clock supports a humidity sensor and a pressure 
   - Support for common cathode and common anode
 
 - Software
- 
+
   Arduino has been chosen as the development environment due to the available libraries and its simplicity. MSP430 has been also considered but I was not able to make it work. Any volunteer?
 
 - Clock layout
 
-  The idea is to have different interchangeable covers allowing the clock to easily change its behaviour and appearance.
+  The idea is to have different interchangeable covers allowing the clock to easily change its appearance (and behavioour).
   By default two types of clock are designed:
     - word clock
       
@@ -39,3 +39,7 @@ In order to make it richer, led-clock supports a humidity sensor and a pressure 
     - number/symbol clock
       
       Consists of a grid with digits and some extra symbols to indicate weather, moon, etc, ...
+      
+    - anyclock
+    
+      Feel free to design your own clock, just represent your info in 64 elements (or more)
