@@ -18,7 +18,7 @@ In order to make it richer, led-clock supports a humidity sensor and a pressure 
   - 4 buttons
 
 - Board features
-  - Small factor 5cmx5cm
+  - Small factor 5cmx5cm (fits in cheap PCB manufacturing)
   - Exported I2C, SPI and Analog pins
   - Stackable
   - Support for 5mm and 3mm matrices
