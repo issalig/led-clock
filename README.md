@@ -61,4 +61,27 @@ In order to make it richer, led-clock supports a humidity sensor and a pressure 
     - Carboard, bands and needles. Easy to change front mask cover
     - Wood. (Anyone with a laser cutter/CNC?)
     
- 
+ <div style="width:60.20mm;height:60.20mm;border:1px solid #000;">
+    <table style="" width="100%" height="100%">
+        <tr height="50%">
+            <td width="50%">A</td>
+            <td width="50%">B</td>
+        </tr>
+        <tr height="50%">
+            <td width="50%">C</td>
+            <td width="50%">D</td>
+        </tr>
+    </table>
+</div>
+
+table, th, td {
+    border:1px solid black;
+    border-collapse:collapse;
+    color:white;
+    background-color:black;
+    padding:0px;
+    text-align:center;
+    font-size:14pt;
+    font-family:Verdana;
+    font-style:Bold;
+}
