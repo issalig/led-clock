@@ -43,3 +43,19 @@ In order to make it richer, led-clock supports a humidity sensor and a pressure 
     - anyclock
     
       Feel free to design your own clock, just represent your info in 64 elements (or more)
+
+
+- TODO
+
+  - New PCB by the end of July. 
+    - Correct GND track
+    - Remove DS1307
+    - Correct button footprint holes
+    - Support for radio TEA5767
+   
+  - Software  
+    - Grid data structure for symbols    
+    - Grid editor
+    
+    
+ 
