@@ -55,7 +55,7 @@ In order to make it richer, led-clock supports a humidity sensor and a pressure 
    
   - Software  
     - Grid data structure for symbols    
-    - Grid editor
+    - Grid editor (http://jsfiddle.net/AAg8e/4/)
     
   - Case
     - Carboard, bands and needles. Easy to change front mask cover
