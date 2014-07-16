@@ -9,7 +9,9 @@ After thinking about the simplest way to build a word clock I experimented with 
 
 In order to make it richer, led-clock supports a humidity sensor and a pressure sensor. Additional sensors are also supported via I2C or SPI.
 
-- Hardware list
+Hardware list
+-------------
+
   - Arduino Pro Mini
   - Max7219
   - Led matrix 8x8 5mm/3mm common cathode or anode
@@ -17,35 +19,38 @@ In order to make it richer, led-clock supports a humidity sensor and a pressure 
   - Pressure sensor BMP180
   - 4 buttons
 
-- Board features
+Board features
+--------------
+
   - Small factor 5cmx5cm (fits in cheap PCB manufacturing)
   - Exported I2C, SPI and Analog pins
   - Stackable
   - Support for 5mm and 3mm matrices
   - Support for common cathode and common anode
 
-- Software
+Software
+--------
 
   Arduino has been chosen as the development environment due to the available libraries and its simplicity. MSP430 has been also considered but I was not able to make it work. Any volunteer?
 
-- Clock layout
+Clock layout
+------------
 
   The idea is to have different interchangeable covers allowing the clock to easily change its appearance (and behavioour).
   By default two types of clock are designed:
-    - word clock
-      
+  
+- word clock
       Consists of a grid of characters that contain the words for telling the time in natural language.
       
-    - number/symbol clock
-      
+- number/symbol clock
       Consists of a grid with digits and some extra symbols to indicate weather, moon, etc, ...
       
-    - anyclock
-    
-      Feel free to design your own clock, just represent your info in 64 elements (or more)
+- anyclock
+    Feel free to design your own clock, just represent your info in 64 elements (or more)
 
 
-- TODO
+TODO
+----
 
   - New PCB by the end of July. 
     - Correct GND track
@@ -60,28 +65,4 @@ In order to make it richer, led-clock supports a humidity sensor and a pressure 
   - Case
     - Carboard, bands and needles. Easy to change front mask cover
     - Wood. (Anyone with a laser cutter/CNC?)
-    
- <div style="width:60.20mm;height:60.20mm;border:1px solid #000;">
-    <table style="" width="100%" height="100%">
-        <tr height="50%">
-            <td width="50%">A</td>
-            <td width="50%">B</td>
-        </tr>
-        <tr height="50%">
-            <td width="50%">C</td>
-            <td width="50%">D</td>
-        </tr>
-    </table>
-</div>
-
-table, th, td {
-    border:1px solid black;
-    border-collapse:collapse;
-    color:white;
-    background-color:black;
-    padding:0px;
-    text-align:center;
-    font-size:14pt;
-    font-family:Verdana;
-    font-style:Bold;
-}
+ 
