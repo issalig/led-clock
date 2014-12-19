@@ -36,7 +36,7 @@ Software
 Clock layout
 ------------
 
-  The idea is to have different interchangeable covers allowing the clock to easily change its appearance (and behavioour).
+  The idea is to have different interchangeable covers allowing the clock to easily change its appearance (and behaviour).
   By default two types of clock are designed:
   
 - word clock
@@ -52,11 +52,13 @@ Clock layout
 TODO
 ----
 
-  - New PCB by the end of July. 
-    - Correct GND track
-    - Remove DS1307
+  - New PCB for the beginning of 2015
+    - Correct GND mask from previous version 0.3
+    - Remove DS1307 circuitry and substitute it for a module
     - Correct button footprint holes
     - Support for radio TEA5767
+	- Documentation for pinout
+	- Possibility of adding capes
    
   - Software  
     - Grid data structure for symbols    
