@@ -24,7 +24,7 @@ Board features
 
   - Small factor 5cmx5cm (fits in cheap PCB manufacturing)
   - Exported I2C, SPI and Analog pins
-  - Stackable
+  - Stackable (1 or more matrices)
   - Support for 5mm and 3mm matrices
   - Support for common cathode and common anode
 
@@ -48,18 +48,19 @@ Clock layout
 - anyclock
     Feel free to design your own clock, just represent your info in 64 elements (or more)
 
-
 TODO
 ----
 
-  - New PCB for the beginning of 2015
+  - New PCB for the beginning of 2015 (SMD)
     - Correct GND mask from previous version 0.3
     - Remove DS1307 circuitry and substitute it for a module
     - Correct button footprint holes
-    - Support for radio TEA5767
 	- Documentation for pinout
+	- Support for radio TEA5767
 	- Possibility of adding capes
-   
+    - Pinout assignment and reserved pins
+	- Pass also I2C, SPI pins on stackable horizontal
+	
   - Software  
     - Grid data structure for symbols    
     - Grid editor (http://jsfiddle.net/AAg8e/4/)
@@ -68,3 +69,9 @@ TODO
     - Carboard, bands and needles. Easy to change front mask cover
     - Wood. (Anyone with a laser cutter/CNC?)
  
+ - Masks
+	- word, temperature, humidex, calendar, spectrum analyzer
+	- rotating wheel and servo?
+ - Capes
+	- stackable capes: nokia screen, communication, motor, radio TEA5767 / TDA7330 ...
+	
