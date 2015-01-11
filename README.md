@@ -33,6 +33,10 @@ Software
 
   Arduino has been chosen as the development environment due to the available libraries and its simplicity. MSP430 has been also considered but I was not able to make it work. Any volunteer?
 
+  Operation modes:
+  -Sleep. Wake up when button is touched
+  -Alarm.
+
 Clock layout
 ------------
 
