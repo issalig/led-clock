@@ -168,6 +168,7 @@ void loop() {
   
   if (USE_BUTTONS){
     //if sleep mode then switch on
+    //interrupt ???
     
     //if pressed for more than 1 second switch off
     //dimming?

@@ -49,6 +49,9 @@ Clock layout
 - number/symbol clock
       Consists of a grid with digits and some extra symbols to indicate weather, moon, etc, ...
       
+- calendar
+	  Consists of a grid with days of week, month, weather, ... (mark first of month to calculate number of day)
+	  
 - anyclock
     Feel free to design your own clock, just represent your info in 64 elements (or more)
 
