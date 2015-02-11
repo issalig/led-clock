@@ -57,16 +57,35 @@ Clock layout
 
 TODO
 ----
-
+  - Checklist
+	- 3.3v and 5v on board
+		(boost for 5v even with batt)
+		(3.3v with logic level or dedicated?)
+		http://lowpowerlab.com/blog/2014/03/13/moteino-power-shield-now-available/
+    - Lipo battery or 3xAAA???
+	- Boost??
+	- Jumper for A or K
+	- datain for 5219 on not pwm??
+	- 2 button
+		1 is mode: sleep, set hour, 
+		1 is set:  +1, next option
+	- 3 button	
+    - buzzer connection  //1M resistor ??? just servo/generic connector (-+S)
+	- remote connection // risk, interference with voltage, just connector(-+S)
+	- xronos clock (how they manage buttons, eeprom)
+  - Wishlist
+	 
+	 
   - New PCB for the beginning of 2015 (SMD)
     - Correct GND mask from previous version 0.3
     - Remove DS1307 circuitry and substitute it for a module
     - Correct button footprint holes
 	- Documentation for pinout
-	- Support for radio TEA5767
-	- Possibility of adding capes
-    - Pinout assignment and reserved pins
-	- Pass also I2C, SPI pins on stackable horizontal
+	- (OK) Support for radio TEA5767
+	- (OK) Possibility of adding capes
+    - (OK) Pinout assignment and reserved pins
+	- Pass also I2C, SPI pins on stackable horizontal	
+	- (OK) Remote IR 1838
 	
   - Software  
     - Grid data structure for symbols    
