@@ -1,5 +1,5 @@
 /*
-  file: dht11.ino
+  file: weather.ino
   description: humidity functions
   date: 25/05/2014
   author: Ismael Salvador

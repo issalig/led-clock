@@ -17,7 +17,7 @@ Hardware list
   - Led matrix 8x8 5mm/3mm common cathode or anode
   - Humidity sensor DHT11
   - Pressure sensor BMP180
-  - 4 buttons
+  - 2 buttons
 
 Board features
 --------------
@@ -25,7 +25,6 @@ Board features
   - Small factor 5cmx5cm (fits in cheap PCB manufacturing)
   - Exported I2C, SPI and Analog pins
   - Stackable (1 or more matrices)
-  - Support for 5mm and 3mm matrices
   - Support for common cathode and common anode
 
 Software
@@ -76,15 +75,16 @@ TODO
   - Wishlist
 	 
 	 
-  - New PCB for the beginning of 2015 (SMD)
-    - Correct GND mask from previous version 0.3
-    - Remove DS1307 circuitry and substitute it for a module
-    - Correct button footprint holes
-	- Documentation for pinout
+  - New PCB for 1st 1/4 2015 (SMD)
+    - (OK) Correct GND mask from previous version 0.3
+    - (OK) Remove DS1307 circuitry and substitute it for a module
+	- (OK) Nokia screen
+    - (OK) Correct button footprint holes
+	- (OK) Documentation for pinout
 	- (OK) Support for radio TEA5767
 	- (OK) Possibility of adding capes
     - (OK) Pinout assignment and reserved pins
-	- Pass also I2C, SPI pins on stackable horizontal	
+	- (OK) Pass also I2C, SPI pins on stackable horizontal	
 	- (OK) Remote IR 1838
 	
   - Software  

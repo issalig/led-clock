@@ -9,6 +9,8 @@
   date: 25/05/2014
   author: Ismael Salvador
 */
+
+#include "config.h"
  
 //#include <Time.h>
 #include "DHT.h"
@@ -36,6 +38,7 @@ RTC_Millis rtc;
 #define USE_ROWS_4017   0
 #define USE_MATRIX_7219 1
 
+//common cathode or anode
 #define USE_7219_C_CATHODE 0
 #define USE_7219_C_ANODE   1
 
