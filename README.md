@@ -79,7 +79,7 @@ TODO
 
   - Software  
     - Grid data structure for symbols    
-    - Grid editor (http://jsfiddle.net/AAg8e/4/) http://jsfiddle.net/AAg8e/16/
+    - Grid editor http://jsfiddle.net/AAg8e/28/
     
   - Case
     - Carboard, bands and needles. Easy to change front mask cover
