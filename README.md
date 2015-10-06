@@ -44,31 +44,25 @@ Clock layout
 ------------
 
   The idea is to have different interchangeable covers allowing the clock to easily change its appearance (and behaviour).
-  By default two types of clock are designed:
+  Some ideas are:
   
 - word clock
-      Consists of a grid of characters that contain the words for telling the time in natural language.
+  Consists of a grid of characters that contain the words for telling the time in natural language.
       
 - number/symbol clock
-      Consists of a grid with digits and some extra symbols to indicate weather, moon, etc, ...
+  Consists of a grid with digits and some extra symbols to indicate weather, moon, etc, ...
       
 - calendar
-	  Consists of a grid with days of week, month, weather, ... (mark first of month to calculate number of day)
+  Consists of a grid with days of week, month, weather, ... (mark first of month to calculate number of day)
 	  
 - anyclock
     Feel free to design your own clock, just represent your info in 64 elements (or more)
 
 TODO
 ----
-  - Checklist
-	- 3.3v and 5v on board (OK)
-		(boost for 5v even with batt)
-		(3.3v with logic level or dedicated?)
-		http://lowpowerlab.com/blog/2014/03/13/moteino-power-shield-now-available/
-    - Lipo battery or 3xAAA???
-	- Boost??
-	- Jumper for A or K (OK)
-	- datain for 5219 on not pwm??
+  
+- 3.3v and 5v on board (OK)
+	http://lowpowerlab.com/blog/2014/03/13/moteino-power-shield-now-available/
 	- 2 button
 		1 is mode: sleep, set hour, 
 		1 is set:  +1, next option
@@ -76,20 +70,13 @@ TODO
     - buzzer connection  //1M resistor ??? just servo/generic connector (-+S)
 	- remote connection // risk, interference with voltage, just connector(-+S)
 	- xronos clock (how they manage buttons, eeprom)
-  - Wishlist
-	 
-	 
-  - New PCB for the beginning of 2015 (SMD)
-    - Correct GND mask from previous version 0.3
-    - Remove DS1307 circuitry and substitute it for a module
-    - Correct button footprint holes
+
 	- Documentation for pinout
-	- (OK) Support for radio TEA5767
-	- (OK) Possibility of adding capes
+
+	- (OK) Possibility of adding capes, I2C, etc..
     - (OK) Pinout assignment and reserved pins
-	- Pass also I2C, SPI pins on stackable horizontal	
-	- (OK) Remote IR 1838
-	
+
+
   - Software  
     - Grid data structure for symbols    
     - Grid editor (http://jsfiddle.net/AAg8e/4/)
