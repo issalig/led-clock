@@ -1,29 +1,25 @@
 led-clock
 =========
 
-Clock adventures with a led matrix.
+Clock adventures with a led matrix and many more.
 
 After thinking about the simplest way to build a word clock I experimented with hand-soldered led matrices, 74HC595, 7219 and others to end up with the mighty 7219 and 8x8 led matrices.
 
 7219 works with common cathode displays but a nice workaround to make it work with common anode matrices is to interchange rows by cols (transposing the matrix) and do the same (transposing it again) from software. Anyway, the PCB has been designed to support both c.c. and c.a. as well as 3mm matrices.
 
-In order to make it richer, led-clock supports a humidity sensor and a pressure sensor. Additional sensors are also supported via I2C or SPI.
-
-Basic Hardware list
--------------------
-
-  - Arduino Nano
-  - Max7219
-  - Led matrix 8x8 5mm common cathode or anode
-  - 2 buttons
+As led matrices did not seemed the only thing to play with in 5x5 cm2, the board now includes weather sensors, FM radio and I2C, SPI connectivity, servo connectors, ...
 
 Board features
 --------------
 
+  - Led matrix 8x8 5mm common cathode or anode
+  - 2 buttons
   - Small factor 5cmx5cm (fits in cheap PCB manufacturing)
   - Exported I2C, SPI and Analog pins
   - Chainable (1 or more matrices)
   - Support for common cathode and common anode
+  - Arduino Nano
+  - Max7219
   - RTC DS1307
   - Nokia LCD
   - TFT
@@ -33,7 +29,7 @@ Board features
   - LDR sensor
   - RGB Led
   - IR 1838
-  - Export servo-like connector.
+  - Exported servo-like connectors.
 
 Software
 --------
