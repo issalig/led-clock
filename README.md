@@ -9,24 +9,31 @@ After thinking about the simplest way to build a word clock I experimented with 
 
 In order to make it richer, led-clock supports a humidity sensor and a pressure sensor. Additional sensors are also supported via I2C or SPI.
 
-Hardware list
--------------
+Basic Hardware list
+-------------------
 
-  - Arduino Pro Mini
+  - Arduino Nano
   - Max7219
-  - Led matrix 8x8 5mm/3mm common cathode or anode
-  - Humidity sensor DHT11
-  - Pressure sensor BMP180
-  - 4 buttons
+  - Led matrix 8x8 5mm common cathode or anode
+  - 2 buttons
 
 Board features
 --------------
 
   - Small factor 5cmx5cm (fits in cheap PCB manufacturing)
   - Exported I2C, SPI and Analog pins
-  - Stackable (1 or more matrices)
-  - Support for 5mm and 3mm matrices
+  - Chainable (1 or more matrices)
   - Support for common cathode and common anode
+  - RTC DS1307
+  - Nokia LCD
+  - TFT
+  - Humidity sensor DHT11
+  - Pressure sensor BMP180
+  - TEA5767 FM Radio
+  - LDR sensor
+  - RGB Led
+  - IR 1838
+  - Export servo-like connector.
 
 Software
 --------
@@ -58,13 +65,13 @@ Clock layout
 TODO
 ----
   - Checklist
-	- 3.3v and 5v on board
+	- 3.3v and 5v on board (OK)
 		(boost for 5v even with batt)
 		(3.3v with logic level or dedicated?)
 		http://lowpowerlab.com/blog/2014/03/13/moteino-power-shield-now-available/
     - Lipo battery or 3xAAA???
 	- Boost??
-	- Jumper for A or K
+	- Jumper for A or K (OK)
 	- datain for 5219 on not pwm??
 	- 2 button
 		1 is mode: sleep, set hour, 
@@ -96,8 +103,8 @@ TODO
     - Wood. (Anyone with a laser cutter/CNC?)
  
  - Masks
-	- word, temperature, humidex, calendar, spectrum analyzer
-	- rotating wheel and servo?
+    - word, temperature, humidex, calendar, spectrum analyzer
+    - rotating wheel and servo?
  - Capes
-	- stackable capes: nokia screen, communication, motor, radio TEA5767 / TDA7330 ...
+	
 	
