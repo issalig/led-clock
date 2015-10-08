@@ -92,3 +92,4 @@ TODO
 
 Light programming	
 https://github.com/szczys/Light-Programmer
+http://www.wayneandlayne.com/projects/blinky/design/
