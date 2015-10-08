@@ -89,5 +89,6 @@ TODO
     - word, temperature, humidex, calendar, spectrum analyzer
     - rotating wheel and servo?
  - Capes
-	
-	
+
+Light programming	
+https://github.com/szczys/Light-Programmer
