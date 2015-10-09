@@ -96,3 +96,5 @@ http://www.wayneandlayne.com/projects/blinky/design/
 https://github.com/mossblaser/Clockie  look for better timing in js (requestAnimationFrame?) up to 60hz http://creativejs.com/resources/requestanimationframe/
 http://jsfiddle.net/paul/rjbGw/3/
 If is up to 60hz, should be sampled at 120Hz from arduino side. 64bytes will take around 10s
+https://github.com/mchr3k/arduino-libs-manchester/blob/master/Manchester.cpp
+
