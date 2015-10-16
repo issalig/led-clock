@@ -1,7 +1,7 @@
 led-clock
 =========
 
-Clock adventures with a led matrix and many more.
+Clock adventures with a led matrix and more fun.
 
 After thinking about the simplest way to build a word clock I experimented with hand-soldered led matrices, 74HC595, 7219 and others to end up with the mighty 7219 and 8x8 led matrices.
 
