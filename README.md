@@ -98,3 +98,5 @@ http://jsfiddle.net/paul/rjbGw/3/
 If is up to 60hz, should be sampled at 120Hz from arduino side. 64bytes will take around 10s
 https://github.com/mchr3k/arduino-libs-manchester/blob/master/Manchester.cpp
 
+//people playing with matrices
+http://www.gammon.com.au/forum/?id=11516
