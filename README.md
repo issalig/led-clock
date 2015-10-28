@@ -103,3 +103,8 @@ http://www.gammon.com.au/forum/?id=11516
 
 //adafruit has also a word clock :D
 https://github.com/andydoro/WordClock-NeoMatrix8x8/tree/master/WordClock_NeoMatrix8x8
+
+https://github.com/formatc1702/Micro-Word-Clock/
+
+http://forum.arduino.cc/index.php?topic=118338.60
+https://github.com/mirkin/pi-word-clock
