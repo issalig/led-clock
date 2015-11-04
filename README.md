@@ -79,7 +79,7 @@ TODO
  - changes for 0.4b
  	- group components by function
  	- more separation on transistor
- 	- check transistor footprint
+ 	- check transistor footprint and type
  	- align connectors on edge (aesthetics)
  	- check button footprint ovaled hole and pin space
  	- common interface for LCD and TFT, check pinouts and models
@@ -116,3 +116,9 @@ https://github.com/formatc1702/Micro-Word-Clock/
 
 http://forum.arduino.cc/index.php?topic=118338.60
 https://github.com/mirkin/pi-word-clock
+
+//nokia
+http://www.ardumania.es/lcd-grafico-de-84x48/ (old pinout)
+http://www.instructables.com/id/Nokia-5110-graphics-tutorial/?ALLSTEPS
+reconsider transistor. check lcd board if already have one.
+reconsider share tft pinout
