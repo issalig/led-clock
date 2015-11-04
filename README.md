@@ -83,7 +83,7 @@ TODO
  	- align connectors on edge (aesthetics)
  	- check button footprint ovaled hole and pin space
  	- common interface for LCD and TFT, check pinouts and models
-
+	-bigger TFT? explore it.
 
   - Software  
     - Grid data structure for symbols    
@@ -120,5 +120,9 @@ https://github.com/mirkin/pi-word-clock
 //nokia
 http://www.ardumania.es/lcd-grafico-de-84x48/ (old pinout)
 http://www.instructables.com/id/Nokia-5110-graphics-tutorial/?ALLSTEPS
-reconsider transistor. check lcd board if already have one.
+reconsider transistor. check lcd board if already have one (seems not).
 reconsider share tft pinout
+3.3v VCC and 3v com signals
+20mA x 4 leds need transistor not to burn signal pin (max 20mA) ppl says 330ohm is enough
+https://learn.sparkfun.com/tutorials/graphic-lcd-hookup-guide //about resistors
+
