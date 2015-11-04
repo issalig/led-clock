@@ -76,6 +76,14 @@ TODO
 	- (OK) Possibility of adding capes, I2C, etc..
     - (OK) Pinout assignment and reserved pins
 
+ - changes for 0.4b
+ 	- group components by function
+ 	- more separation on transistor
+ 	- check transistor footprint
+ 	- align connectors on edge (aesthetics)
+ 	- check button footprint ovaled hole and pin space
+ 	- common interface for LCD and TFT, check pinouts and models
+
 
   - Software  
     - Grid data structure for symbols    
