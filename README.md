@@ -83,11 +83,12 @@ TODO
  	- align connectors on edge (aesthetics)
  	- check button footprint ovaled hole and pin space
  	- common interface for LCD and TFT, check pinouts and models
-	-bigger TFT? explore it.
+	- bigger TFT? explore it.
+        - silkscreen on back for headers pluging on back (such as screens, martices, ...)
 
   - Software  
     - Grid data structure for symbols    
-    - Grid editor http://jsfiddle.net/AAg8e/28/
+    - Grid editor http://jsfiddle.net/issalig/2h4wjbmL/
     
   - Case
     - Carboard, bands and needles. Easy to change front mask cover
