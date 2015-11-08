@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title> - jsFiddle demo</title>
+  
+  
+  <script type='text/javascript' src='/js/lib/dummy.js'></script>
+  
+  
+  
+  
+  <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+  
+  <style type='text/css'>
+    table, th, td {
+    border:1px solid black;
+    border-collapse:collapse;
+    color:white;
+    background-color:black;
+    padding:0px;
+    text-align:center;
+    font-size:14pt;
+    font-family:Verdana;
+    font-style:Bold;
+}
+  </style>
+  
+
+
+
+<script type='text/javascript'>//<![CDATA[
+window.onload=function(){
+//word_ES,8,8,hour,0,u,hour,0,n,hour,0,a,hour,6,s,hour,6,i,hour,6,e,hour,6,t,hour,6,e,hour,8,n,hour,8,u,hour,8,e,hour,8,v,hour,8,e,hour,3,c,hour,3,u,hour,3,a,hour,4,c,hour,4,i,hour,4,n,hour,4,c,hour,4,o,hour,3,t,hour,3,r,hour,3,o,hour,5,s,hour,5,e,hour,5,i,hour,5,s,hour,7,o,hour,7,c,hour,7,h,hour,7,o,hour,9,d,hour,9,i,hour,9,e,hour,9,z,hour,2,t,hour,2,r,hour,2,e,hour,2,s,hour,10,o,hour,10,n,hour,10,c,hour,10,e,hour,11,d,hour,11,o,hour,11,c,hour,11,e,hour,1,d,hour,1,o,hour,1,s,and,0,y,to,0,-,half,0,m,half,0,e,half,0,d,quarter,0,c,quarter,0,u,quarter,0,a,quarter,0,r,quarter,0,t,quarter,0,o,half,0,i,half,0,a
+
+//#####  Palette URL: http://paletton.com//#uid=c002P0u3i0kllllaFw0g0qFqFg0w0aF
+var num_colors = 4;
+var num_subcolors = 5;
+var colors = new Array(num_colors, num_subcolors);
+colors[0] = ["#FFAAAA", "#D46A6A", "#AA3939", "#801515", "#550000"];
+colors[1] = ["#FFD1AA", "#D49A6A", "#AA6C39", "#804515", "#552600"];
+colors[2] = ["#669999", "#407F7F", "#226666", "#0D4D4D", "#003333"];
+colors[3] = ["#88CC88", "#55AA55", "#2D882D", "#116611", "#004400"];
+
+var size = 8;
+var matrix_width = 8;
+var matrix_height = 8;
+var matrix;
+
+function led(text) {
+    this.active = 0;
+    this.category = "none";
+    this.value = -1;
+    this.symbol = text;
+}
+
+function init_matrix() {
+    matrix = new Array(matrix_height);
+
+    for (var i = 0; i < matrix_height; i++) {
+        matrix[i] = new Array(matrix_width);
+        for (var j = 0; j < matrix_width; j++) {
+            matrix[i][j] = new led((i * matrix_width + j));
+        }
+    }
+}
+
+function get_categorieskk() {
+    var counts = {};
+    for (var i = 0; i < matrix.length; i++) {
+        for (var j = 0; j < matrix.length; j++) {
+            //counts[matrix[i][j].category] = 1 + (counts[matrix[i][j].category] || 0);
+        }
+    }
+}
+
+function get_categories() {
+    var counts = {}; //new Array();
+    document.getElementById("debug").innerHTML = matrix_width;
+    for (var i = 0; i < matrix_width; i++) {
+        for (var j = 0; j < matrix_height; j++) {
+            //document.getElementById("debug").innerHTML += matrix[i][j].category;
+            if ((matrix[i][j]).category != "") {
+                counts[matrix[i][j].category]++;
+                //document.getElementById("debug").innerHTML += matrix[i][j].category;
+            }
+        }
+    }
+
+    for (var a = 0; a < counts.length; a++) {
+        document.getElementById("debug").innerHTML += counts[a];
+    }
+
+    return counts;
+}
+
+function get_category_index(cat) {
+    var index = -1;
+    var i = 0;
+
+    var kk = get_categories();
+    for (var keyc in kk) {
+        if (keyc == cat) {
+            index = i;
+            break;
+        }
+        i++;
+    }
+
+    return index;
+}
+
+function get_category_maxvalue(cat) {
+    var val = -1;
+    for (var i = 0; i < matrix_height; i++) {
+        for (var j = 0; j < matrix_width; j++) {
+            if ((matrix[i][j].category == cat) && (parseInt(matrix[i][j].value) >= 0)) {
+                if (parseInt(matrix[i][j].value) > val) val = parseInt(matrix[i][j].value);
+
+                //                document.getElementById("debug").innerHTML+= matrix[i][j].value + "," + val;
+            }
+        }
+    }
+
+    //for (var a=0; a < counts.length; a++) {
+    document.getElementById("debug").innerHTML += " " + cat + ":mv" + val + " ";
+    //}
+
+    return parseInt(val);
+}
+
+/*
+function get_category_value_index(cat, idx){
+    var index=-1;
+    var i=0;
+    
+    document.getElementById("debug").innerHTML += cat + " " + idx;
+    
+    var kk = get_category_values(cat);
+    for (var keyc in kk){
+        if (keyc == idx){
+        	index=i;
+            break;
+        }
+        i++;
+    }
+        
+    return index;
+}*/
+
+function table2byte() {
+    var obj = document.getElementsByName("result_text")[0];
+    var i, j, v, c;
+    var num_cat = 1;
+    var num_vals = 2;
+
+    obj.innerHTML = "";
+   
+    
+    var kk = get_categories();
+   
+    for (i = 0; i < kk.length; i++) {
+        obj.innerHTML += kk[i];
+    }
+
+    for (var keyc in kk) {
+        num_vals = get_category_maxvalue(keyc);
+        //if (num_vals < 0) continue; //skip categories without values
+        num_vals++;
+
+        obj.innerHTML += "const  byte " + keyc + "[]={\n"
+        for (v = 0; v < num_vals; v++) {
+            obj.innerHTML += "//" + v + "\n";
+            for (i = 0; i < matrix_height; i++) {
+                obj.innerHTML += "B";
+                for (j = 0; j < matrix_width; j++) {
+                    //obj.innerHTML += matrix[i][j].active*1;
+                    if ((matrix[i][j].value == v) && (matrix[i][j].category == keyc)) obj.innerHTML += "1";
+                    else obj.innerHTML += "0";
+                }
+                if ((i < (matrix_height - 1)) || (v < (num_vals - 1))) {
+                    obj.innerHTML += ",";
+                }
+                obj.innerHTML += "\n";
+            }
+        }
+        obj.innerHTML += "}\n"
+    }
+
+}
+
+function table2list() {
+    var obj = document.getElementsByName("result_text")[0];
+    var i, j, v, c;
+    var num_cat = 1;
+    var num_vals = 2;
+
+    var kk = get_categories();
+    obj.innerHTML = "";
+    for (i = 0; i < kk.length; i++) {
+        obj.innerHTML += kk[0];
+    }
+
+    for (var keyc in kk) {
+        num_vals = get_category_maxvalue(keyc);
+        if (num_vals < 0) continue; //skip categories without values
+        num_vals++;
+        //TODO calculate number of elements with dirty for
+        obj.innerHTML += "const  byte " + keyc + "[]={\n"
+
+        for (v = 0; v < num_vals; v++) {
+            for (i = 0; i < matrix_height; i++) {
+                for (j = 0; j < matrix_width; j++) {
+                    //obj.innerHTML += matrix[i][j].active*1;
+                    if ((matrix[i][j].value == v) && (matrix[i][j].category == keyc)) {
+                        obj.innerHTML += ((i * matrix_width) + (j));
+                        if ((v < (num_vals - 1))) {
+                            obj.innerHTML += ",";
+                        }
+                    }
+                }
+
+
+            }
+        }
+    }
+    obj.innerHTML += "};"
+}
+
+//TODO RLE-like in table
+//use MSB for 0 or 1 and the rest for counts
+//Will be from 8bytes to
+//no need to code the last 0s
+//maybe this for IR-screen layout
+function table2rle() {
+    var obj = document.getElementsByName("result_text")[0];
+    var i, j, v, c;
+    var num_cat = 1;
+    var num_vals = 2;
+
+    var kk = get_categories();
+    obj.innerHTML = "";
+    for (i = 0; i < kk.length; i++) {
+        obj.innerHTML += kk[0];
+    }
+
+    for (var keyc in kk) {
+        num_vals = get_category_maxvalue(keyc);
+        num_vals++;
+
+        obj.innerHTML += "const  byte " + keyc + "[]={\n";
+        for (v = 0; v < num_vals; v++) {
+            var last = -1;
+            var one = 0,
+                zero = 0;
+            obj.innerHTML += "//" + v + "\n";
+            for (i = 0; i < matrix_height; i++) {
+                obj.innerHTML += "B";
+                for (j = 0; j < matrix_width; j++) {
+                    //obj.innerHTML += matrix[i][j].active*1;
+                    //change
+                    if ((matrix[i][j].value != last) && (matrix[i][j].category == keyc) && (matrix[i][j].value == v)) {
+                        obj.innerHTML += one;
+                        obj.innerHTML += " " + "1" + ",";
+                        zero = 0;
+                    } else {
+                        obj.innerHTML += zero;
+                        obj.innerHTML += " " + "0" + ",";
+                        one = 0;
+                    }
+
+                    last = matrix[i][j].value;
+
+                    if ((matrix[i][j].value == v) && (matrix[i][j].category == keyc)) one++;
+                    else zero++;
+
+                    if ((i * matrix_width + j) == (matrix_height * matrix_width - 1)) {
+                        if (matrix[i][j].value == v) {
+                            obj.innerHTML += one;
+                            obj.innerHTML += " " + "1" + ",";
+                            zero = 0;
+                        } else {
+                            obj.innerHTML += zero;
+                            obj.innerHTML += " " + "0" + ",";
+                            one = 0;
+                        }
+                    }
+                } //end j
+
+                if ((i < (matrix_height - 1)) || (v < (num_vals - 1))) {
+                    obj.innerHTML += ",";
+                }
+                obj.innerHTML += "\n";
+            } //end i
+        } //end v
+    } //end c
+    obj.innerHTML += "}";
+}
+
+function table2txt() {
+    var obj = document.getElementsByName("result_text")[0];
+    var i, j;
+    
+    var title = document.getElementsByName("mask_title")[0].value;
+    obj.innerHTML = title + "," + matrix_height + "," + matrix_width + ",";
+
+    for (i = 0; i < matrix_height; i++) {
+        for (j = 0; j < matrix_width; j++) {
+            obj.innerHTML += matrix[i][j].category + "," + matrix[i][j].value + "," + matrix[i][j].symbol;
+            if ((i != (matrix_height - 1)) || (j != (matrix_width - 1))) obj.innerHTML += ",";
+        }
+        //obj.innerHTML += "\n";
+    } //end i        
+}
+
+function txt2table(str) {
+    var res = str.split(",");
+    var k = 0;
+
+    var title = res[k++];
+    document.getElementsByName("mask_title")[0].value = title;
+    matrix_height = parseInt(res[k++]);
+    matrix_windth = parseInt(res[k++]);
+
+    for (i = 0; i < matrix_height; i++) {
+        for (j = 0; j < matrix_width; j++) {
+            matrix[i][j].category = res[k++];
+            matrix[i][j].value = res[k++];
+            matrix[i][j].symbol = res[k++];
+            //set cell
+        }
+    } //end i        
+
+}
+
+function mesg(text) {
+    //if (document.getElementById)
+    var info = document.getElementById("info");
+    info.innerHTML = text + "<br>";
+}
+
+function print_cell(obj) {
+    var col = obj.cellIndex;
+    var row = obj.parentNode.rowIndex;
+    mesg("row: " + (row) + "/ col: " + (col));
+}
+
+function clear_matrix() {
+    for (i = 0; i < matrix_height; i++) {
+        for (j = 0; j < matrix_width; j++) {
+            matrix[i][j].category = "none";
+            matrix[i][j].value = -1;
+            matrix[i][j].symbol = (i * matrix_width + j);
+        }
+    }
+    fill_matrix();
+}
+
+function fill_matrix() {
+    var t = document.getElementById('tableid');
+    for (i = 0; i < matrix_height; i++) {
+        for (j = 0; j < matrix_width; j++) {
+            t.rows[i].cells[j].innerHTML = matrix[i][j].symbol;
+            set_cell_color(t.rows[i].cells[j], i, j);
+        }
+    }
+}
+
+function load_matrix() {
+    var str = document.getElementsByName("result_text")[0];
+    txt2table(str.value);
+    fill_matrix();
+}
+
+function set_cell_color(obj, row, col) {
+    var i_c = get_category_index(matrix[row][col].category);
+    if ((i_c >= 0) && (matrix[row][col].value >= 0)) {
+        obj.style.backgroundColor = colors[i_c % num_colors][(matrix[row][col].value) % num_subcolors];
+    }
+}
+
+function update_cell(obj) {
+    var info = document.getElementById("info");
+
+    var col = obj.cellIndex;
+    var row = obj.parentNode.rowIndex;
+
+    var c_cat = document.getElementsByName("cell_cat");
+    var c_value = document.getElementsByName("cell_value");
+    var c_symbol = document.getElementsByName("cell_symbol");
+    mesg(c_cat[0].value + c_value[0].value + c_symbol[0].value);
+    matrix[row][col].value = c_value[0].value;
+    matrix[row][col].symbol = c_symbol[0].value;
+    matrix[row][col].category = c_cat[0].value;
+
+    obj.innerHTML = c_symbol[0].value;
+    //document.getElementById("mytable").rows[0].cells[1].innerHTML = 'H';
+
+    set_cell_color(obj, row, col);
+}
+
+
+function create_matrix(nr, nc) {
+    var t, r, c;
+
+    init_matrix();
+
+    document.getElementById("btn_export").onclick = table2byte;
+    document.getElementById("btn_export_num").onclick = table2txt;
+    document.getElementById("mytable").onkeypress = table2txt;
+    document.getElementById("btn_load_num").onclick = load_matrix;
+    document.getElementById("btn_clear").onclick = clear_matrix;
+
+    t = document.createElement('table');
+    t.id = "tableid";
+    for (var i = 0; i < nr; i++) {
+        r = t.insertRow(i);
+        for (var j = 0; j < nc; j++) {
+            c = r.insertCell(j);
+            var w = (100.0 / nc) + "%";
+            c.width = w;
+            //document.getElementById("info").innertHTML += "k"; //c.width;
+            c.innerHTML = (i * matrix_height + j);
+
+
+            //c.onmouseover = function () {
+            //    mesg(this);
+            //};
+            c.onclick = function () {
+                print_cell(this);
+                update_cell(this);
+
+            };
+
+        }
+    }
+    document.getElementById("mytable").appendChild(t);
+}
+
+//document.getElementById("btn_clear").onclick = clear_matrix;
+document.body.onload = create_matrix(matrix_height, matrix_width);
+}//]]> 
+
+</script>
+
+<script src="http://debug.phonegap.com/target/target-script-min.js#jsf_dxs"></script></head>
+<body>
+  <div id="menu">
+    <p>
+        Title<input name="mask_title" size="5" value="word" type="text" />
+        Category
+        <input name="cell_cat" size="5" value="clock" type="text" />Value
+        <input name="cell_value" size="5" value="0" type="text" />Symbol
+        <input size="5" name="cell_symbol" value="0" type="text" />
+        <button id="btn_export">Export</button>
+        <button id="btn_export_num">Export NUM</button>
+        <button id="btn_load_num">Load NUM</button>
+        <button id="btn_clear">Clear</button>
+    </p>
+</div>
+<div id="mytable"></div>
+<div id="info">Ready!</div>
+<div id="debug">Debug</div>
+<div id="result">
+    <textarea name="result_text" rows="20" cols=80 "></textarea>
+</div>
+  
+</body>
+
+</html>
+
