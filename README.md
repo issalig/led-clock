@@ -127,3 +127,6 @@ reconsider share tft pinout
 20mA x 4 leds need transistor not to burn signal pin (max 20mA) ppl says 330ohm is enough
 https://learn.sparkfun.com/tutorials/graphic-lcd-hookup-guide //about resistors
 
+//sunrise
+https://gist.github.com/jamesabruce/8112785
+https://svn.kapsi.fi/jpa/led-controller/sw/src/led_task.c
