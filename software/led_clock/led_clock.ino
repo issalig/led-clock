@@ -13,6 +13,9 @@
 
 //includes
 #include "config.h"
+
+#include <avr/sleep.h> 
+
 #include <ButtonJC.h>
 #include <Time.h>
 #include <TimeAlarms.h>
@@ -28,9 +31,8 @@
 #define DEBUG_SERIAL 0
 
 //clock type
-#define WORD_CLOCK   1
-#define NUMBER_CLOCK 0
-
+#define WORD_CLOCK   0
+#define NUMBER_CLOCK 1
 //common cathode or anode led matrix
 #define USE_7219_C_CATHODE 0
 #define USE_7219_C_ANODE   1

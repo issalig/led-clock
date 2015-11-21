@@ -5,7 +5,7 @@
   author: Ismael Salvador
 */
 
-//#if (WORD_CLOCK)
+#if (WORD_CLOCK)
 #include "word.h"
 
 void led_alarm(){//int arg_cnt, char **args){
@@ -61,4 +61,4 @@ void set_led_word_clock(){
   set_led_mask(w_quarter, q);
 }
 
-//#endif
+#endif

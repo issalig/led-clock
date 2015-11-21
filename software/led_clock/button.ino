@@ -33,13 +33,19 @@ void manage_buttons() {
   //dimming?
   if (button_mode.pressedFor(1000)) {
     if (mode != MODE_OFF) {
-      fill_matrix(1);
-      draw_matrix(0, intensity);
-      fill_matrix(0);
-      draw_matrix(0, intensity);
+      for (int index = 0; index < lc.getDeviceCount(); index++) {
+        for (int i = 15; i > 0; i--) {
+          lc.setIntensity(index, i); 
+          delay(200);
+        }
+        lc.clearDisplay(index);
+        lc.shutdown(index, true); //sleep
+      }      
       mode = MODE_OFF;
       Serial.print("LONG ");
       Serial.println(mode);
+
+       sleepNow();
     }
   }
   //
@@ -49,6 +55,8 @@ void manage_buttons() {
     //fill_matrix(0);
     //set_led_number(mode * 8);
     //draw_matrix(refresh_delay);
+    for (int index = 0; index < lc.getDeviceCount(); index++) 
+      lc.shutdown(index, false); 
     Serial.print("M ");
     Serial.println(mode);
   }
@@ -65,7 +73,9 @@ void manage_buttons() {
       Serial.print(chour);
       //Serial.println(mode);
       fill_matrix(0);
+#if (WORD_CLOCK)
       set_led_hour_word_clock();
+#endif
       draw_matrix(0, intensity);
     } else if (mode == MODE_MINUTE) {
       DateTime future = dnow.unixtime() + 60L;
@@ -79,27 +89,65 @@ void manage_buttons() {
       //Serial.println(mode);
 
       fill_matrix(0);
+#if (WORD_CLOCK)
       set_led_mins_word_clock();
+#endif      
       draw_matrix(0, intensity);
       //keep this while in set mode
       //exit mode after 5 seconds without activity
     }
   }
 
+  //timeout switch off
   if (button_mode.releasedFor(60000) && button_set.releasedFor(60000) && cmdTimeout(60000)) { //60 secs
     if (mode != MODE_OFF) {
 
       for (int index = 0; index < lc.getDeviceCount(); index++) {
         for (int i = 15; i > 0; i--) {
           lc.setIntensity(index, i); 
-          delay(100);
+          delay(200);
         }
         lc.clearDisplay(index);
         lc.shutdown(index, true); //sleep
       }
       mode = MODE_OFF;
       Serial.print("Auto off ");
+      
     }
   }
 }
 
+//http://tae09.blogspot.com.es/2012/10/arduino-low-power-tutorial.html
+void sleepNow()  
+{  
+    Serial.println("Good night");
+      
+    // Choose our preferred sleep mode:  
+    set_sleep_mode(SLEEP_MODE_PWR_DOWN);//SAVE);  
+    //  
+    interrupts();  
+    // Set pin 2 as interrupt and attach handler:  
+    attachInterrupt(0, pinInterrupt, HIGH);  
+    //delay(100);  
+    //  
+    // Set sleep enable (SE) bit:  
+  
+    sleep_enable();  
+    //  
+    // Put the device to sleep:  
+    digitalWrite(13,LOW);   // turn LED off to indicate sleep  
+    sleep_mode();  
+    //  
+    // Upon waking up, sketch continues from this point.  
+    sleep_disable();  
+    digitalWrite(13,HIGH);   // turn LED on to indicate awake  
+    
+    Serial.println("Good morning");
+    lc.shutdown(0, false);
+    mode = MODE_ON;
+}  
+void pinInterrupt()  
+{  
+    detachInterrupt(0);  
+    attachInterrupt(0, pinInterrupt, HIGH);  
+}

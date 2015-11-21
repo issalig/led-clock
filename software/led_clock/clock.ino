@@ -67,7 +67,6 @@ void draw_time() {
         set_led_word_clock();
       #endif
     
-
     //set_led_word_clock();
 
     //write leds for an amount of time

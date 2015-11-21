@@ -80,6 +80,8 @@ void cmd_hour(int arg_cnt, char **args)
 
 void cmd_on(int arg_cnt, char **args) {
   mode = MODE_ON;
+  lc.shutdown(0, false); //sleep
+  lc.shutdown(1, false); //sleep
 }
 
 void cmd_off(int arg_cnt, char **args) {
