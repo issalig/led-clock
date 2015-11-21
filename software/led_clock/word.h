@@ -1,15 +1,17 @@
 /*
-  file: words.ino
-  description: led masks for time words
-  date: 25/05/2014
+  file: word.h
+  description: masks for word mode
+  date: 12/11/2015
   author: Ismael Salvador
 */
 
+
 //MODIFY this file according to your word mask
 
-//led order in raster is reversed in rows
+//PROGMEM
+//pgm_read_word_near(charSet + k);
 
-const  byte whour[]={    
+const  byte w_hour[] /*PROGMEM*/ ={    
   B00000000, //0 == 12
   B00000000,
   B00000000,
@@ -119,7 +121,7 @@ const  byte whour[]={
   B00000000
 };
 
-const byte wquarter[]={
+const byte w_quarter[] /*PROGMEM*/ ={
   B00000000, //o'clock
   B00000000,
   B00000000,
@@ -157,8 +159,20 @@ const byte wquarter[]={
   B11111100
 };
 
+
+const byte w_symbol[] /*PROGMEM*/ ={
+  B00000000, //symbol
+  B00000000,
+  B00000000,
+  B00000000,
+  B00000000,
+  B00000000,
+  B00001000,
+  B00000000
+};
+
 //second screen
-const  byte whour2[]={    
+const  byte w_hour2[]={    
   B00000000, //0 == 12
   B00000000,
   B00000000,
@@ -267,39 +281,3 @@ const  byte whour2[]={
   B00000000,
   B00000000
 };
-
-//word clock gives time in "human" way
-//using hours and reference to the quarter
-
-void set_led_word_hour(byte h){
-  int i;
-  byte wh=h%12; //hours from 1-12
-  
-  //for all the rows
-  for(i=0; i< MATRIX_ROWS; i++)
-    set_or_row(i,whour[i+(wh*MATRIX_COLS)]);
-}
-
-void set_led_word_quarter(byte q){
-
-  //52.7,7.5   o'clock
-  //8,22.5     quarter past
-  //22.5,37.5  half
-  //37.5-52.5  quarter to
-  
-  int i;
-  byte wq=((q+7)/15)%4;
-  //for all the rows
-  for(i=0; i< MATRIX_ROWS; i++)
-    set_or_row(i, wquarter[i+(wq*MATRIX_COLS)]);
-}
-
-void set_led_word_clock(){ 
-    //show next hour if minutes over 37
-    if (cminute > 37)
-      set_led_word_hour(chour+1);
-    else 
-      set_led_word_hour(chour);
-      
-    set_led_word_quarter(cminute);
-}

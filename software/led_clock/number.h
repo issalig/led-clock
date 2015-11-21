@@ -5,16 +5,16 @@
   author: Ismael Salvador
 */
 
-//day_ten
-//day_unit
-//month
-//hour
-//min
-//min_unit
-//weather
-//arrow
-//pulse
-//moon
+//m_day_ten
+//m_day_unit
+//m_month
+//m_hour
+//m_min
+//m_min_unit
+//m_weather
+//m_arrow
+//m_pulse
+//m_moon
 
 const byte m_day_ten[]={
 //0

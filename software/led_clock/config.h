@@ -8,7 +8,7 @@
 //pinout version
 #define VERSION_0_4
 
-#if defined(VERSION_O_2)
+#if defined(VERSION_0_2)
 #define DHT      D6
 #define BUTTON_0 A1
 #define BUTTON_1 A2
@@ -21,7 +21,7 @@
 #endif
 
 ///////////////////////////
-#if defined(VERSION_O_3)
+#if defined(VERSION_0_3)
 #define DHT      D6
 #define BUTTON_0 D2
 #define BUTTON_1 D3
@@ -34,29 +34,38 @@
 #endif
 
 ///////////////////////////
-#if defined(VERSION_O_4)
+#if defined(VERSION_0_4)
 #define LDR     A2
-#define DHT     D6
-#define BUTTON_0 D2
-#define BUTTON_1 D4
+
+#define BUTTON_0 2
+#define BUTTON_1 4
+#define BUTTON_MODE BUTTON_1
+#define BUTTON_SET BUTTON_0
+
 #define LED_R D3
 #define LED_G D5
 #define LED_B D6
 //7219
 #define DIN_7219 A0
-#define LOAD_7219 D7
-#define CLK_7219  D8
+#define LOAD_7219 7
+#define CLK_7219  8
 //dht
-#define DHTPIN 6
+#define DHT_PIN 6
 //nokia
-#define RST_NK D7
-#define CLK_NK D8
-#define LIGHT_NK D9
-#define CE_NK D10
-#define DIN_NK D11
-#define CE_NK D10
+#define RST_NK 7
+#define CLK_NK 8
+#define LIGHT_NKD9
+#define CE_NK 10
+#define DIN_NK 11
+#define CE_NK 10
 //ir
-#define IR1838 D12
+#define IR1838 12
+
+//dht
+#define DHT_TYPE         DHT11 
+#define DHT_PIN 6
+
+
 #endif
 
 

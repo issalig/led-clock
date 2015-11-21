@@ -5,6 +5,8 @@
   author: Ismael Salvador
 */
 
+#if (NUMBER_CLOCK)
+
 #include "DHT.h"
 extern DHT dht;
 extern int weather;
@@ -22,45 +24,7 @@ extern int weather;
 //m_pulse
 //m_moon
 
-/*
-const byte Hled[]={
-const byte Mled[]={
-const byte mled[]={
-const byte Dled[]={
-};
-const byte dled[]={
-};
 
-const byte moonled[]={
-const byte weatherled
-const byte pulseled
-const byte arrowled
-*/
-
-
-void set_led_number_moon(byte b){
-  //new; 0% illuminated ** 
-  //Waxing crescent; 25% illuminated
-  //First quarter; 50% illuminated **
-  //Waxing gibbous; 75% illuminated
-  //Full; 100% illuminated  **
-  //Waning gibbous; 75% illuminated
-  //Last quarter; 50% illuminated **
-  //Waning crescent; 25% illuminated
-  //default to new; 0% illuminated **
-  int i;
-  for(i=0; i< MATRIX_ROWS; i++){
-    //set tens
-    set_or_row(i,m_moon[i+(b*MATRIX_COLS)]);
-  }
-}
-
-void set_led_mask(const byte *mask, byte b){  
-    int i;
-    for(i=0; i< MATRIX_ROWS; i++){
-      set_or_row(i,mask[i+(b*MATRIX_COLS)]);
-  }
-}
 
 void set_led_number_weather(){
   int weather;
@@ -117,3 +81,4 @@ void set_led_number_clock(){
 }
 
 
+#endif
