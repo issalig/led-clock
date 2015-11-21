@@ -5,7 +5,6 @@
   author: Ismael Salvador
 */
 
-
 //matrix size
 #define MATRIX_ROWS 8
 #define MATRIX_COLS 8
@@ -20,6 +19,7 @@
 const int colPins[] = {
   2, 3, 4, 5, 6, 7
 };  // LED matrix columns are assigned to digital pins
+
 const int clockPin4017 = 9;  // Connected to Clock pin 14 in 4017
 const int resetPin4017 = 8;  // Connected to Reset pin 15 in 4017
 
@@ -34,7 +34,7 @@ const int clk7219    = 8;  //Connected to CLK  pin 11 in 7219
 const int load7219   = 7;  //Connected to LOAD pin 10 in 7219
 
 //7219 object
-LedControl lc = LedControl(dataIn7219, clk7219, load7219, 1);
+//LedControl lc = LedControl(dataIn7219, clk7219, load7219, 1);
 
 //led status will be stored in raster matrix
 char raster[MATRIX_ROWS][MATRIX_COLS];
@@ -62,9 +62,13 @@ void init_matrix_pins() {
   }
 
   if (USE_MATRIX_7219) {
-    lc.shutdown(0, false); //wake up from saving mode
-    lc.setIntensity(0, 8); //medium intensity
-    lc.clearDisplay(0);   //clear display
+    Serial.print("Num devices: ");
+    Serial.println(lc.getDeviceCount());
+    for (int index = 0; index < lc.getDeviceCount(); index++) {
+      lc.shutdown(index, false); //wake up from saving mode
+      lc.setIntensity(index, 8); //medium intensity
+      lc.clearDisplay(index);   //clear display
+    }
   }
 }
 
@@ -302,24 +306,24 @@ void draw_matrix_4017_595(int wait) {
 /*
   draws matrix for a period of time using a 7219
 */
-void draw_matrix_7219(int wait) {
+void draw_matrix_7219(int index) {
   int x, y;
   unsigned long time1;
 
-  lc.clearDisplay(0);
+    lc.clearDisplay(index);
 
-  //rows
-  for (y = 0; y < MATRIX_ROWS; y++) {
-    //columns
-    for (x = 0; x < MATRIX_COLS; x++)
-      if (raster[y][x]) {
-        lc.setLed(0, y, x, true);
-      }
-  }
+    //rows
+    for (y = 0; y < MATRIX_ROWS; y++) {
+      //columns
+      for (x = 0; x < MATRIX_COLS; x++)
+        if (raster[y][x]) {
+          lc.setLed(index, y, x, true);
+        }
+    }
 
-  time1 = millis();
-  while (millis() < time1 + wait);
-
+    //time1 = millis();
+    //while (millis() < time1 + wait);
+  
 }
 
 /*
@@ -342,15 +346,19 @@ void draw_matrix_7219(int wait) {
   }
 */
 
-void draw_matrix(int wait) {
+void draw_matrix_4017x(int wait) {
   if (USE_COLS_PINS)
     draw_matrix_4017_port(wait);
   else if (USE_COLS_595)
     draw_matrix_4017_595(wait);
-  else if (USE_MATRIX_7219) {
+}
+
+void draw_matrix(int index, int intensity) {
+  if (USE_MATRIX_7219) {
     if (USE_7219_C_ANODE)
       transpose_matrix();
-    draw_matrix_7219(wait);
+    lc.setIntensity(index, intensity);
+    draw_matrix_7219(0);
   }
 }
 

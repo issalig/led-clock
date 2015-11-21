@@ -76,7 +76,7 @@ void draw_time() {
     else if (WORD_CLOCK)
       refresh_delay = 50;
 
-    draw_matrix(refresh_delay);
+    draw_matrix(0, intensity);
   }
 }
 

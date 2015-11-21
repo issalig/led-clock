@@ -10,10 +10,10 @@
 
 void led_alarm(){//int arg_cnt, char **args){
   fill_matrix(1);
-  draw_matrix(1000);
+  draw_matrix(0, intensity);
   delay(1);
   fill_matrix(0);
-  draw_matrix(1000);
+  draw_matrix(0, intensity);
 }
 
 

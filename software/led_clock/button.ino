@@ -5,22 +5,22 @@
   author: Ismael Salvador
 */
 
-void initButton(int num){
-   pinMode(num, INPUT_PULLUP);
+void initButton(int num) {
+  pinMode(num, INPUT_PULLUP);
 }
 
-int readAButton(int num){
-  int button = 1; 
-  if (analogRead(num) > 16) 
-      button = 0;
+int readAButton(int num) {
+  int button = 1;
+  if (analogRead(num) > 16)
+    button = 0;
 
   return button;
 }
 
-int readDButton(int num){
-  int button = 1; 
-  if (digitalRead(num) == HIGH) 
-      button = 0;
+int readDButton(int num) {
+  int button = 1;
+  if (digitalRead(num) == HIGH)
+    button = 0;
   return button;
 }
 
@@ -34,9 +34,9 @@ void manage_buttons() {
   if (button_mode.pressedFor(1000)) {
     if (mode != MODE_OFF) {
       fill_matrix(1);
-      draw_matrix(refresh_delay);
+      draw_matrix(0, intensity);
       fill_matrix(0);
-      draw_matrix(refresh_delay);
+      draw_matrix(0, intensity);
       mode = MODE_OFF;
       Serial.print("LONG ");
       Serial.println(mode);
@@ -56,7 +56,7 @@ void manage_buttons() {
   //if (readDButton(BUTTON_SET)) {
   if (button_set.wasPressed()) {
     set_led_number(mode * 8 + 7);
-    draw_matrix(refresh_delay);
+    draw_matrix(0, intensity);
     if (mode == MODE_HOUR) {
       DateTime future = dnow.unixtime() + 3600L;
       rtc.adjust(future);
@@ -66,7 +66,7 @@ void manage_buttons() {
       //Serial.println(mode);
       fill_matrix(0);
       set_led_hour_word_clock();
-      draw_matrix(50);
+      draw_matrix(0, intensity);
     } else if (mode == MODE_MINUTE) {
       DateTime future = dnow.unixtime() + 60L;
       rtc.adjust(future);
@@ -80,7 +80,7 @@ void manage_buttons() {
 
       fill_matrix(0);
       set_led_mins_word_clock();
-      draw_matrix(50); //this delay sholud not exist
+      draw_matrix(0, intensity);
       //keep this while in set mode
       //exit mode after 5 seconds without activity
     }
@@ -88,16 +88,18 @@ void manage_buttons() {
 
   if (button_mode.releasedFor(60000) && button_set.releasedFor(60000) && cmdTimeout(60000)) { //60 secs
     if (mode != MODE_OFF) {
-      Serial.println(mode);
-      fill_matrix(1);
-      draw_matrix(refresh_delay);
-      fill_matrix(0);
-      draw_matrix(refresh_delay);
+
+      for (int index = 0; index < lc.getDeviceCount(); index++) {
+        for (int i = 15; i > 0; i--) {
+          lc.setIntensity(index, i); 
+          delay(100);
+        }
+        lc.clearDisplay(index);
+        lc.shutdown(index, true); //sleep
+      }
       mode = MODE_OFF;
       Serial.print("Auto off ");
-      Serial.println(mode);
     }
   }
-
 }
 
