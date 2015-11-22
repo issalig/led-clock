@@ -5,6 +5,11 @@
   author: Ismael Salvador
 */
 
+
+#ifdef USE_EEPROM
+#define _PROGMEM PROGMEM
+#endif
+
 //m_day_ten
 //m_day_unit
 //m_month
@@ -16,7 +21,7 @@
 //m_pulse
 //m_moon
 
-const byte m_day_ten[]={
+const byte m_day_ten[] _PROGMEM ={
 //0
 B00100000,
 B00000000,
@@ -54,7 +59,7 @@ B00000000,
 B00000000,
 B00000000
 };
-const byte m_day_unit[]={
+const byte m_day_unit[] _PROGMEM ={
 //0
 B00100000,
 B00000000,
@@ -146,7 +151,7 @@ B00000000,
 B00000000,
 B00100000
 };
-const byte m_month[]={
+const byte m_month[] _PROGMEM ={
 //0
 B00010000,
 B00000000,
@@ -256,7 +261,7 @@ B00000000,
 B00000000,
 B00000001
 };
-const byte m_hour[]={
+const byte m_hour[] _PROGMEM ={
 //0
 B00000000,
 B00000000,
@@ -366,7 +371,7 @@ B00000000,
 B00000000,
 B00000000
 };
-const byte m_min[]={
+const byte m_min[] _PROGMEM ={
 //0
 B00000000,
 B00000000,
@@ -422,7 +427,7 @@ B00000000,
 B00000000,
 B00000000
 };
-const byte m_min_unit[]={
+const byte m_min_unit[] _PROGMEM ={
 //0
 B00000000,
 B00000000,
@@ -514,7 +519,7 @@ B00000100,
 B00000000,
 B00000000
 };
-const byte m_weather[]={
+const byte m_weather[] _PROGMEM ={
 //0
 B00000000,
 B00000000,
@@ -543,7 +548,7 @@ B00000000,
 B00000010,
 B00000000
 };
-const byte m_arrow[]={
+const byte m_arrow[] _PROGMEM ={
 //0
 B00000000,
 B00000000,
@@ -581,7 +586,7 @@ B00000000,
 B00001000,
 B00000000
 };
-const byte m_pulse[]={
+const byte m_pulse[] _PROGMEM ={
 //0
 B00000000,
 B00000000,
@@ -592,7 +597,7 @@ B00000000,
 B00000100,
 B00000000
 };
-const byte m_moon[]={
+const byte m_moon[] _PROGMEM ={
 //0
 B00000000,
 B00000000,

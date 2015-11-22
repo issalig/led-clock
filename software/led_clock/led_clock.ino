@@ -30,9 +30,13 @@
 
 #define DEBUG_SERIAL 0
 
+//use eeprom for mask (saves ram space)
+#define USE_EEPROM
+
 //clock type
 #define WORD_CLOCK   0
 #define NUMBER_CLOCK 1
+
 //common cathode or anode led matrix
 #define USE_7219_C_CATHODE 0
 #define USE_7219_C_ANODE   1
@@ -93,6 +97,7 @@ void setup() {
   //setTime(chour,cminute,csecond,cday,cmonth,cyear);
   //Alarm.timerRepeat(5, led_alarm);
   //Alarm.alarmRepeat(dowSaturday,8,30,30,WeeklyAlarm);  // 8:30:30 every Saturday
+  weather_setup();
 }
 
 //let's go for a trip
@@ -108,6 +113,6 @@ void loop() {
   manage_buttons();
   cmdPoll();
   //print_debug_info();
-
+  weather_update();
 }
 

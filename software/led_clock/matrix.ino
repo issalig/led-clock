@@ -362,11 +362,15 @@ void draw_matrix(int index, int intensity) {
   }
 }
 
-void set_led_mask(const byte *mask, byte b) {
-  int i;
+void set_led_mask(const byte *mask, byte index) {
+  int i, offset;
   for (i = 0; i < MATRIX_ROWS; i++) {
-    set_or_row(i, mask[i + (b * MATRIX_COLS)]);
-    //set_or_row(i,pgm_read_word_near(mask + i+(b*MATRIX_COLS)));
+    offset = index * MATRIX_ROWS; //beginning of mask index
+#ifndef USE_EEPROM
+    set_or_row(i, mask[offset + i]);
+#else
+    set_or_row(i,pgm_read_byte(mask + offset + i));
+#endif    
   }
 }
 

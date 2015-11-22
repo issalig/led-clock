@@ -36,8 +36,8 @@ void set_led_number_weather(){
        dew_point   = dewPoint(temperature, humidity);
      }
                
-     //show it for 2 seconds every half minute or pressed button
-     if (((csecond % 30) < 5) || (LOW == digitalRead(BUTTON_0))) {
+     //show it for 10 seconds every half minute or pressed button
+     if (((csecond % 30) < 10) || (LOW == digitalRead(BUTTON_0))) {
       fill_matrix(0);
       set_led_mask(m_hour, (int)(humidity/10));   //use hour to display humidity
       set_led_mask(m_min, (int)temperature/10); //use mins to display temperature

@@ -9,9 +9,13 @@
 //MODIFY this file according to your word mask
 
 //PROGMEM
-//pgm_read_word_near(charSet + k);
+//pgm_read_byte_near(charSet + k);
 
-const  byte w_hour[] /*PROGMEM*/ ={    
+#ifdef USE_EEPROM
+#define _PROGMEM PROGMEM
+#endif
+
+const  byte w_hour[] _PROGMEM ={    
   B00000000, //0 == 12
   B00000000,
   B00000000,
@@ -121,7 +125,7 @@ const  byte w_hour[] /*PROGMEM*/ ={
   B00000000
 };
 
-const byte w_quarter[] /*PROGMEM*/ ={
+const byte w_quarter[] _PROGMEM ={
   B00000000, //o'clock
   B00000000,
   B00000000,
@@ -160,7 +164,7 @@ const byte w_quarter[] /*PROGMEM*/ ={
 };
 
 
-const byte w_symbol[] /*PROGMEM*/ ={
+const byte w_symbol[] _PROGMEM ={
   B00000000, //symbol
   B00000000,
   B00000000,
@@ -172,7 +176,7 @@ const byte w_symbol[] /*PROGMEM*/ ={
 };
 
 //second screen
-const  byte w_hour2[]={    
+const  byte w_hour2[] _PROGMEM ={    
   B00000000, //0 == 12
   B00000000,
   B00000000,
