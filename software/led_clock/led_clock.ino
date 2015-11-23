@@ -107,7 +107,8 @@ void loop() {
       last_refresh = millis();
       read_time();
       fill_matrix(0);   //clear screen
-      draw_time();
+      if (!button_set.isPressed())
+        draw_time();
     }
   }
   manage_buttons();

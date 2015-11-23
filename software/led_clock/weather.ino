@@ -11,21 +11,19 @@
 
 //Forecast based on pressure
 #define PRESS_UNSTABLE_HIGH 0
-#define PRESS_STABLE_GOOD   1
+#define PRESS_STABLE_GOOD   1 //GOOD
 #define PRESS_STABLE        2
-#define PRESS_STABLE_RAINY  3
+#define PRESS_STABLE_RAINY  3 //BAD
 #define PRESS_UNSTABLE_LOW  4
 
 //Forecast based on pressure and temp
-#define PT_HEAVY_RAIN          0
-#define PT_RAIN                1
-#define PT_VARIABLE_WEATHER    2
-#define PT_LIKELY_RAIN         3
-#define PT_VARIABLE_WEATHER    4
-#define PT_GOOD_WEATHER        5
-#define PT_COLD_WIND           6
-#define PT_GOOD_WEATHER        7
-#define PT_DRY_WEATHER         8
+#define PT_HEAVY_RAIN          0  //BAD
+#define PT_RAIN                1  //BAD
+#define PT_VARIABLE_WEATHER    2  //MEDIUM
+#define PT_LIKELY_RAIN         3  //MEDIUM
+#define PT_GOOD_WEATHER        4  //GOOD
+#define PT_COLD_WIND           5  //GOOD
+#define PT_DRY_WEATHER         6  //GOOD
 
 //Pressure status
 #define PRESS_RISING           0
@@ -183,20 +181,20 @@ int updateMeasures(time_t before, time_t seconds) {
 
   //if seconds passed after last time update measures
   if ((last_time + seconds) < time_now) {
-/*
-    Serial.print(last_time);
-    Serial.print(" + ");
-    Serial.print(seconds);
-    Serial.print(" = ");
-    Serial.print(last_time + seconds);
-    Serial.print(" > ");
-    Serial.print(time_now);
-    Serial.println(" ");
-*/
+    /*
+        Serial.print(last_time);
+        Serial.print(" + ");
+        Serial.print(seconds);
+        Serial.print(" = ");
+        Serial.print(last_time + seconds);
+        Serial.print(" > ");
+        Serial.print(time_now);
+        Serial.println(" ");
+    */
     last_time = time_now;
     current_temp     = bmp.readTemperature();
     //current_pressure = bmp.readPressure();
-    current_pressure = (bmp.readPressure() + bmp.readPressure())/2;
+    current_pressure = (bmp.readPressure() + bmp.readPressure()) / 2;
     //    current_altitude = (bmp.readAltitude(101500) + bmp.readAltitude(101500))/2;
 
     diff_temp     = current_temp - last_temp;
