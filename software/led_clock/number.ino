@@ -24,6 +24,18 @@ extern int weather;
 //m_pulse
 //m_moon
 
+void set_led_number_dew_point(){
+  int weather;
+    //show dew point
+    if (dew_point > 18)
+      weather = 2; //humid
+    else if (dew_point > 10 )
+      weather = 1; //confortable
+    else
+      weather = 0; //dry
+
+    set_led_mask(m_weather, weather);
+}
 
 
 void set_led_number_weather() {
@@ -44,15 +56,7 @@ void set_led_number_weather() {
       set_led_mask(m_min_unit, (int)temperature % 10);
     //}
 
-    //show dew point
-    if (dew_point > 18)
-      weather = 2; //humid
-    else if (dew_point > 10 )
-      weather = 1; //confortable
-    else
-      weather = 0; //dry
-
-    set_led_mask(m_weather, weather);
+    set_led_number_dew_point();
   }
 
 }
@@ -83,6 +87,7 @@ void set_led_number_clock() {
     set_led_mask(m_pulse, 0);
 
   //set_led_number_weather();
+  set_led_number_dew_point();
 
   moon = moon_phase(cyear, cmonth, cday);
   set_led_mask(m_moon, moon / 2); //0-7 phases
