@@ -58,6 +58,10 @@ void set_led_number_weather() {
 
     set_led_number_dew_point();
   }
+  //int press_fc = pressure_forecast(int diff_pressure, int diff_time_sec);
+  //if (press_fc > 3) press_fc = 0;
+  //set_led_mask(m_arrow, press_fc);
+
 
 }
 
@@ -92,7 +96,7 @@ void set_led_number_clock() {
   moon = moon_phase(cyear, cmonth, cday);
   set_led_mask(m_moon, moon / 2); //0-7 phases
 
-  set_led_mask(m_arrow, csecond / 15);
+  //set_led_mask(m_arrow, csecond / 15);
 
   if ((cday / 10) > 0)
     set_led_mask(m_day_ten, cday / 10);

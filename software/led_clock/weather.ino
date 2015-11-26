@@ -10,20 +10,20 @@
 //http://wx.erau.edu/reference/text/WXElements_TW_01Dec99.pdf
 
 //Forecast based on pressure
-#define PRESS_UNSTABLE_HIGH 0
-#define PRESS_STABLE_GOOD   1 //GOOD
-#define PRESS_STABLE        2
-#define PRESS_STABLE_RAINY  3 //BAD
-#define PRESS_UNSTABLE_LOW  4
+#define FC_P_UNSTABLE_HIGH 0
+#define FC_P_STABLE_GOOD   1 //GOOD
+#define FC_P_STABLE        2
+#define FC_P_STABLE_RAINY  3 //BAD
+#define FC_P_UNSTABLE_LOW  4
 
 //Forecast based on pressure and temp
-#define PT_HEAVY_RAIN          0  //BAD
-#define PT_RAIN                1  //BAD
-#define PT_VARIABLE_WEATHER    2  //MEDIUM
-#define PT_LIKELY_RAIN         3  //MEDIUM
-#define PT_GOOD_WEATHER        4  //GOOD
-#define PT_COLD_WIND           5  //GOOD
-#define PT_DRY_WEATHER         6  //GOOD
+#define FC_PT_HEAVY_RAIN          0  //BAD
+#define FC_PT_RAIN                1  //BAD
+#define FC_PT_VARIABLE_WEATHER    2  //MEDIUM
+#define FC_PT_LIKELY_RAIN         3  //MEDIUM
+#define FC_PT_GOOD_WEATHER        4  //GOOD
+#define FC_PT_COLD_WIND           5  //GOOD
+#define FC_PT_DRY_WEATHER         6  //GOOD
 
 //Pressure status
 #define PRESS_RISING           0
@@ -123,15 +123,15 @@ int pressure_temperature_forecast(int diff_pressure, int diff_temperature, int d
     temperature_tendency = TEMP_FALLING;
 
   //get forecast
-  if      ((pressure_gradient == PRESS_FALLING) && (temperature_gradient == TEMP_FALLING)) pt_forecast = PT_HEAVY_RAIN;
-  else if ((pressure_gradient == PRESS_FALLING) && (temperature_gradient == TEMP_STABLE))  pt_forecast = PT_RAIN;
-  else if ((pressure_gradient == PRESS_FALLING) && (temperature_gradient == TEMP_RISING))  pt_forecast = PT_VARIABLE_WEATHER;
-  else if ((pressure_gradient == PRESS_STABLE)  && (temperature_gradient == TEMP_FALLING)) pt_forecast = PT_RAIN;
-  else if ((pressure_gradient == PRESS_STABLE)  && (temperature_gradient == TEMP_STABLE))  pt_forecast = PT_VARIABLE_WEATHER;
-  else if ((pressure_gradient == PRESS_STABLE)  && (temperature_gradient == TEMP_RISING))  pt_forecast = PT_GOOD_WEATHER;
-  else if ((pressure_gradient == PRESS_RISING)  && (temperature_gradient == TEMP_FALLING)) pt_forecast = PT_COLD_WIND;
-  else if ((pressure_gradient == PRESS_RISING)  && (temperature_gradient == TEMP_STABLE))  pt_forecast = PT_GOOD_WEATHER;
-  else if ((pressure_gradient == PRESS_RISING)  && (temperature_gradient == TEMP_RISING))  pt_forecast = PT_DRY_WEATHER;
+  if      ((pressure_gradient == PRESS_FALLING) && (temperature_gradient == TEMP_FALLING)) pt_forecast = FC_PT_HEAVY_RAIN;
+  else if ((pressure_gradient == PRESS_FALLING) && (temperature_gradient == TEMP_STABLE))  pt_forecast = FC_PT_RAIN;
+  else if ((pressure_gradient == PRESS_FALLING) && (temperature_gradient == TEMP_RISING))  pt_forecast = FC_PT_VARIABLE_WEATHER;
+  else if ((pressure_gradient == PRESS_STABLE)  && (temperature_gradient == TEMP_FALLING)) pt_forecast = FC_PT_RAIN;
+  else if ((pressure_gradient == PRESS_STABLE)  && (temperature_gradient == TEMP_STABLE))  pt_forecast = FC_PT_VARIABLE_WEATHER;
+  else if ((pressure_gradient == PRESS_STABLE)  && (temperature_gradient == TEMP_RISING))  pt_forecast = FC_PT_GOOD_WEATHER;
+  else if ((pressure_gradient == PRESS_RISING)  && (temperature_gradient == TEMP_FALLING)) pt_forecast = FC_PT_COLD_WIND;
+  else if ((pressure_gradient == PRESS_RISING)  && (temperature_gradient == TEMP_STABLE))  pt_forecast = FC_PT_GOOD_WEATHER;
+  else if ((pressure_gradient == PRESS_RISING)  && (temperature_gradient == TEMP_RISING))  pt_forecast = FC_PT_DRY_WEATHER;
 
   return pt_forecast;
 }
@@ -155,15 +155,15 @@ int pressure_forecast(int diff_pressure, int diff_time_sec) {
   int pressure_gradient = (3600 * diff_pressure) / diff_time_sec; //changes per hour
 
   if (pressure_gradient > 250) {
-    pressure_forecast = PRESS_UNSTABLE_HIGH;
+    pressure_forecast = FC_P_UNSTABLE_HIGH;
   } else if (pressure_gradient > 50) {
-    pressure_forecast = PRESS_STABLE_GOOD;
+    pressure_forecast = FC_P_STABLE_GOOD;
   } else if (pressure_gradient > -50) {
-    pressure_forecast = PRESS_STABLE;
+    pressure_forecast = FC_P_STABLE;
   } else if (pressure_gradient > -250) {
-    pressure_forecast = PRESS_STABLE_RAINY;
+    pressure_forecast = FC_P_STABLE_RAINY;
   } else {
-    pressure_forecast = PRESS_UNSTABLE_LOW;
+    pressure_forecast = FC_P_UNSTABLE_LOW;
   }
 
   return pressure_forecast;
