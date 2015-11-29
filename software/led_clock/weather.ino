@@ -5,9 +5,12 @@
   author: Ismael Salvador
 */
 
-
+//references
 //http://grotjahn.ucdavis.edu/course%2fatm111/fcstnbk-v2.doc/
 //http://wx.erau.edu/reference/text/WXElements_TW_01Dec99.pdf
+//https://github.com/RobTillaart/Arduino/blob/master/libraries/Temperature/temperature.h
+//http://www.freescale.com/files/sensors/doc/app_note/AN3914.pdf
+//http://www.mysensors.org/build/pressure
 
 //Forecast based on pressure
 #define FC_P_UNSTABLE_HIGH 0
@@ -169,6 +172,31 @@ int pressure_forecast(int diff_pressure, int diff_time_sec) {
   return pressure_forecast;
 }
 
+//http://www.freescale.com/files/sensors/doc/app_note/AN3914.pdf
+//ph = p0*e^(-h/7990m)
+//Another approach that is more direct and quicker in calculating the weather in 
+//the simple approach is to know the current altitude.
+//This cuts the need to wait and see a “trend"
+//p0 = 101.3 kPa, pressure for good sunny weather at current altitude
+//h is the current altitude
+
+int pressure_forecast_simple(float sensor_pressure) {
+  int altitude = 0;
+  int weather;
+  float p_weather, weather_diff;
+  
+  p_weather =  (101.3 * exp(((float)(altitude)) / (-7900))); //good weather pressure at current altitude
+  weather_diff = sensor_pressure - p_weather;
+  if (weather_diff > 0.25)
+    weather = 0; //sun
+  if ((weather_diff <= 0.25) || (weather_diff >= (-0.25)))
+    weather = 1; //sun/cloud
+  if (weather_diff < (-0.25))
+    weather = 2; //rain
+
+  return weather;
+}
+
 /*
   Updates pressure readings
 */
@@ -266,6 +294,18 @@ void weather_update() {
 }
 
 
+//Celsius to Fahrenheit conversion
+double Fahrenheit(double celsius)
+{
+  return 1.8 * celsius + 32;
+}
+
+//Celsius to Kelvin conversion
+double Kelvin(double celsius)
+{
+  return celsius + 273.15;
+}
+
 //humidity
 //http://en.wikipedia.org/wiki/Dew_point
 
@@ -303,6 +343,16 @@ float calculate_humidex(float temperature, float humidity) {
   return humidex;
 }
 
+/*
+  //  http://www.ccacac.com/wp-content/uploads/2010/06/Humidex-Graph.pdf -
+  double humidex(double celsius, double DewPoint)
+  {
+    double e = 19.833625 - 5417.753 /(273.16 + DewPoint);
+    double h = celsius + 3.3941 * exp(e) - 5.555;
+    return h;
+  }
+*/
+
 //returns humidex level 0 is good, 5 is bad
 int get_humidex_level(float humidex)
 {
@@ -330,3 +380,57 @@ int get_humidex_level(float humidex)
   return level;
 }
 
+//heat index
+// TF = temp in F
+// R = humidity in %
+double heatIndex(double TF, double R)
+{
+  const double c1 = -42.379;
+  const double c2 =  2.04901523;
+  const double c3 = 10.14333127;
+  const double c4 = -0.22475541;
+  const double c5 = -0.00683783;
+  const double c6 = -0.05481717;
+  const double c7 =  0.00122874;
+  const double c8 =  0.00085282;
+  const double c9 = -0.00000199;
+
+  double A = (( c5 * TF) + c2) * TF + c1;
+  double B = (((c7 * TF) + c4) * TF + c3) * R;
+  double C = (((c9 * TF) + c8) * TF + c6) * R * R;
+
+  return A + B + C;
+}
+
+// less constants => faster but slightly inaccurate
+// TF = temp in F
+// R = humidity in %
+double heatIndexFast(double TF, double R)
+{
+  const double c1 = -42.379;
+  const double c2 =  2.04901523;
+  const double c3 = 10.14333127;
+  const double c4 = -0.22475541;
+
+  double A = c2 * TF + c1;
+  double B = (c4 * TF + c3) * R;
+
+  return A + B;
+}
+
+// integer version
+// TF = temp in F
+// R = humidity in %
+int heatIndexFastInt(int TF, int R)
+{
+  // consts multiplied by 1024
+  long c1 = -43396;
+  long c2 = 2098;
+  long c3 = 10387;
+  long c4 = -230;
+
+  long A = c2 * TF + c1;  // so A is x 1024
+  long B = (c4 * TF + c3) * R;  // and B too
+
+  return (A + B + 512) / 1024; // division becomes a shift; +512 is for rounding
+}
