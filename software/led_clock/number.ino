@@ -24,36 +24,43 @@ extern int weather;
 //m_pulse
 //m_moon
 
-void set_led_number_dew_point(){
+void set_led_number_dew_point() {
   int weather;
-    //show dew point
-    if (dew_point > 18)
-      weather = 2; //humid
-    else if (dew_point > 10 )
-      weather = 1; //confortable
-    else
-      weather = 0; //dry
+  //show dew point
+  if (dew_point > 18)
+    weather = 2; //humid
+  else if (dew_point > 10 )
+    weather = 1; //confortable
+  else
+    weather = 0; //dry
 
-    set_led_mask(m_weather, weather);
+  set_led_mask(m_weather, weather);
 }
+/*
+void set_led_number_pressure_fc() {
+  float sensor_pressure = (bmp.readPressure() + bmp.readPressure()) / 2;
+  int pressure_fc = pressure_forecast_simple(sensor_pressure);
 
+  set_led_mask(m_weather, weather);
+}
+*/
 
 void set_led_number_weather() {
   int weather;
   if (USE_DHT11) {
     //refresh measures every half minute, it takes sometime in DHT11
     //if ((csecond % 30) == 0) {
-      humidity    = (int) dht.readHumidity();
-      temperature = (int) dht.readTemperature();
-      dew_point   = dewPoint(temperature, humidity);
+    humidity    = (int) dht.readHumidity();
+    temperature = (int) dht.readTemperature();
+    dew_point   = dewPoint(temperature, humidity);
     //}
 
     //show it for 10 seconds every half minute or pressed button
     //if (((csecond % 30) < 10) || (LOW == digitalRead(BUTTON_1))) {
-      fill_matrix(0);
-      set_led_mask(m_hour, (int)(humidity / 10)); //use hour to display humidity
-      set_led_mask(m_min, (int)temperature / 10); //use mins to display temperature
-      set_led_mask(m_min_unit, (int)temperature % 10);
+    fill_matrix(0);
+    set_led_mask(m_hour, (int)(humidity / 10)); //use hour to display humidity
+    set_led_mask(m_min, (int)temperature / 10); //use mins to display temperature
+    set_led_mask(m_min_unit, (int)temperature % 10);
     //}
 
     set_led_number_dew_point();
@@ -68,7 +75,7 @@ void set_led_number_weather() {
 void set_led_number_hour() {
   if (chour > 11)
     set_led_mask(m_pulse, 0);
-    set_led_mask(m_hour, chour % 12);
+  set_led_mask(m_hour, chour % 12);
 }
 
 void set_led_number_minute() {

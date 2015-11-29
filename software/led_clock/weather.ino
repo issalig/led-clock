@@ -174,7 +174,7 @@ int pressure_forecast(int diff_pressure, int diff_time_sec) {
 
 //http://www.freescale.com/files/sensors/doc/app_note/AN3914.pdf
 //ph = p0*e^(-h/7990m)
-//Another approach that is more direct and quicker in calculating the weather in 
+//Another approach that is more direct and quicker in calculating the weather in
 //the simple approach is to know the current altitude.
 //This cuts the need to wait and see a “trend"
 //p0 = 101.3 kPa, pressure for good sunny weather at current altitude
@@ -184,7 +184,7 @@ int pressure_forecast_simple(float sensor_pressure) {
   int altitude = 0;
   int weather;
   float p_weather, weather_diff;
-  
+
   p_weather =  (101.3 * exp(((float)(altitude)) / (-7900))); //good weather pressure at current altitude
   weather_diff = sensor_pressure - p_weather;
   if (weather_diff > 0.25)
