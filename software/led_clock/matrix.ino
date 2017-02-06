@@ -6,14 +6,15 @@
 */
 
 //matrix size
-#define MATRIX_ROWS 8
-#define MATRIX_COLS 8
+#define MATRIX_ROWS 5//8
+#define MATRIX_COLS 5//8
 
 //matrix type
 #define USE_COLS_PINS   0 //cols driven by pins
 #define USE_COLS_595    0 //cols driven by a 555
 #define USE_ROWS_4017   0 //rows with a 4017
-#define USE_MATRIX_7219 1
+#define USE_MATRIX_7219 0 //
+#define USE_WS2812B     1 //
 
 //columns driven by pins
 const int colPins[] = {
@@ -35,6 +36,9 @@ const int load7219   = 7;  //Connected to LOAD pin 10 in 7219
 
 //7219 object
 //LedControl lc = LedControl(dataIn7219, clk7219, load7219, 1);
+
+//WS2812B
+const int dataPinWS2812B = 3;
 
 //led status will be stored in raster matrix
 char raster[MATRIX_ROWS][MATRIX_COLS];
@@ -69,6 +73,10 @@ void init_matrix_pins() {
       lc.setIntensity(index, 8); //medium intensity
       lc.clearDisplay(index);   //clear display
     }
+  }
+  if (USE_WS2812B){      
+      FastLED.addLeds<WS2812B, DATA_WS2812B, RGB>(wsleds, WS_NUM_LEDS);
+      FastLED.setBrightness( BRIGHTNESS );      
   }
 }
 
@@ -360,6 +368,29 @@ void draw_matrix(int index, int intensity) {
     lc.setIntensity(index, intensity);
     draw_matrix_7219(0);
   }
+  if (USE_WS2812B){
+    draw_matrix_ws2812b();
+  }
+}
+
+
+void draw_matrix_ws2812b(){
+  int x, y, h;
+  unsigned long time1;
+
+    //clear display
+
+    //rows
+    for (y = 0; y < MATRIX_ROWS; y++) {
+      //columns
+      for (x = 0; x < MATRIX_COLS; x++)
+        h=y*MATRIX_COLS+x;
+        if (raster[y][x]) {
+          wsleds[h] = CRGB::Red;
+        } else
+          wsleds[h] = CRGB::Black;
+    }
+  FastLED.show();
 }
 
 void set_led_mask(const byte *mask, byte index) {

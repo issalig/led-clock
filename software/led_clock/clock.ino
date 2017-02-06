@@ -65,6 +65,9 @@ void draw_time() {
       #endif
       #if (WORD_CLOCK)
         set_led_word_clock();
+      #endif     
+      #if (HEX_CLOCK)
+        set_led_hex_clock();
       #endif
     
     //set_led_word_clock();

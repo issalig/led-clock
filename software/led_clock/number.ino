@@ -112,5 +112,24 @@ void set_led_number_clock() {
   set_led_mask(m_month, cmonth - 1);
 }
 
-
 #endif
+
+
+void set_led_hex_clock() {
+  set_led_mask(hex_hour, chour % 12);
+  set_led_mask(m_min_unit, (cminute-5) % 10);
+
+  if (csecond % 2)
+    set_led_mask(hx_symbol, 2); //central point
+
+  //set_led_number_weather();
+  //set_led_number_dew_point();
+
+  //moon = moon_phase(cyear, cmonth, cday);
+  //set_led_mask(m_moon, moon / 2); //0-7 phases
+
+  //set_led_mask(m_arrow, csecond / 15);
+
+
+}
+

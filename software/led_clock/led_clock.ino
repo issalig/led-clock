@@ -14,19 +14,26 @@
 //includes
 #include "config.h"
 
-#include <avr/sleep.h> 
+//#include <avr/sleep.h> 
 
-#include <ButtonJC.h>
+
+//#include <ButtonJC.h>
 #include <Time.h>
 #include <TimeAlarms.h>
 
+//#include <Adafruit_Sensor.h>
 #include "DHT.h"
-#include "LedControl.h"
+
+//#ifdef USE_MATRIX_7219
+  #include "LedControl.h"
+//#endif
 
 #include <Wire.h>
 #include "RTClib.h"
 
 #include <Cmd.h>
+
+#include "FastLED.h"
 
 #define DEBUG_SERIAL 0
 
@@ -35,15 +42,16 @@
 
 //clock type
 #define WORD_CLOCK   0
-#define NUMBER_CLOCK 1
+#define NUMBER_CLOCK 0
+#define HEX_CLOCK    1
 
 //common cathode or anode led matrix
 #define USE_7219_C_CATHODE 0
-#define USE_7219_C_ANODE   1
+#define USE_7219_C_ANODE   0
 
-#define USE_RTC 1
-#define USE_BUTTONS 1
-#define USE_DHT11       1
+#define USE_RTC         0//1
+#define USE_BUTTONS     0//1
+#define USE_DHT11       0//1
 #define USER_SOFT_I2C   1
 
 
@@ -67,12 +75,21 @@ RTC_Millis rtc;
 
 DHT dht(DHT_PIN, DHT11);
 
+//#if USE_MATRIX_7219
 LedControl lc = LedControl(9, 8, 7); //dataIn7219, clk7219, load7219, 4); //up to 4 devices
+//#endif
 
+#if USE_BUTTONS 
+//https://forum.mysensors.org/topic/2169/wall-mounted-mood-light/11
 //Button button_mode = Button(BUTTON_MODE, PULLUP);
 //Button button_set = Button(BUTTON_SET, PULLUP);
-ButtonJC button_mode(BUTTON_MODE, true, true, 20);//, PULLUP, INVERT, DEBOUNCE_MS);
-ButtonJC button_set(BUTTON_SET, true, true, 20);//, PULLUP, INVERT, DEBOUNCE_MS);
+Button button_mode(BUTTON_MODE, true, true, 20);//, PULLUP, INVERT, DEBOUNCE_MS);
+Button button_set(BUTTON_SET, true, true, 20);//, PULLUP, INVERT, DEBOUNCE_MS);
+#endif
+
+#define WS_NUM_LEDS 19
+#define BRIGHTNESS 128
+CRGB wsleds[WS_NUM_LEDS];
 
 DateTime dnow;
 
@@ -107,11 +124,13 @@ void loop() {
       last_refresh = millis();
       read_time();
       fill_matrix(0);   //clear screen
-      if (!button_set.isPressed())
+      //if (!button_set.isPressed())
         draw_time();
     }
   }
+  #if USE_BUTTONS 
   manage_buttons();
+  #endif
   cmdPoll();
   //print_debug_info();
   weather_update();
