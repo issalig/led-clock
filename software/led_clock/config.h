@@ -65,7 +65,8 @@
 #define DHT_TYPE         DHT11 
 #define DHT_PIN 6
 
-
+//ws2812b data pin
+#define DATA_WS2812B 3
 #endif
 
 
