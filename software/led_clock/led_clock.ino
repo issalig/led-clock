@@ -14,7 +14,13 @@
 //includes
 #include "config.h"
 
-#include <avr/sleep.h> 
+
+#if defined(__AVR__)
+#include <avr/sleep.h>
+// #elif defined(ESP8266)
+// #include <sleep.h>
+#endif
+
 
 
 #include <ButtonJC.h>

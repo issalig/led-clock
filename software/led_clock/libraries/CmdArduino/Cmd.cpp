@@ -38,14 +38,22 @@
     its possible to execute individual functions within the sketch.
 */
 /**************************************************************************/
+#if defined (__AVR__) || (__avr__)
 #include <avr/pgmspace.h>
+#else
+#include <pgmspace.h>
+#endif
+
 #if ARDUINO >= 100
 #include <Arduino.h>
 #else
 #include <WProgram.h>
 #endif
+
 #include "HardwareSerial.h"
 #include "Cmd.h"
+
+#include <stdio.h>
 
 // command line message buffer and pointer
 static uint8_t msg[MAX_MSG_SIZE];
@@ -95,8 +103,10 @@ void cmd_parse(char *cmd)
     char buf[50];
     cmd_t *cmd_entry;
 
+    #if defined (__AVR__) || (__avr__)
     fflush(stdout);
-
+    #endif
+    
     // parse the command line statement and break it up into space-delimited
     // strings. the array of strings will be saved in the argv array.
     argv[i] = strtok(cmd, " ");

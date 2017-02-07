@@ -135,7 +135,7 @@ void manage_buttons() {
   }
 
   //timeout switch off
-  if (button_mode.releasedFor(60000) && button_set.releasedFor(60000) /*&& cmdTimeout(60000)*/) { //60 secs
+  if (button_mode.releasedFor(60000) && button_set.releasedFor(60000) && cmdTimeout(60000)) { //60 secs
     if (mode != MODE_OFF) {
 
       for (int index = 0; index < lc.getDeviceCount(); index++) {
@@ -157,7 +157,7 @@ void manage_buttons() {
 void sleepNow()
 {
   Serial.println("Good night");
-
+#if defined(__AVR__)
   // Choose our preferred sleep mode:
   set_sleep_mode(SLEEP_MODE_PWR_DOWN);//SAVE);
   //
@@ -177,9 +177,14 @@ void sleepNow()
   // Upon waking up, sketch continues from this point.
   sleep_disable();
   digitalWrite(13, HIGH);  // turn LED on to indicate awake
-
-  Serial.println("Good morning");
+  
   lc.shutdown(0, false);
+#elif defined(ESP8266)
+//https://github.com/esp8266/Arduino/issues/1488
+//https://learn.sparkfun.com/tutorials/esp8266-thing-hookup-guide/example-sketch-goodnight-thing-sleep-mode
+  ESP.deepSleep(5 * 1000000); //us
+#endif  
+  Serial.println("Good morning");
   mode = MODE_ON;
 }
 void wakeMe()
@@ -187,3 +192,5 @@ void wakeMe()
   detachInterrupt(digitalPinToInterrupt(2));
   attachInterrupt(digitalPinToInterrupt(2), wakeMe, HIGH);
 }
+
+
