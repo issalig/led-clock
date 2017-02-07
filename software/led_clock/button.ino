@@ -162,8 +162,8 @@ void sleepNow()
   set_sleep_mode(SLEEP_MODE_PWR_DOWN);//SAVE);
   //
   interrupts();
-  // Set pin 2 as interrupt and attach handler:
-  attachInterrupt(digitalPinToInterrupt(2), wakeMe, HIGH);
+  // Set pin BUTTON_0 as interrupt and attach handler:
+  attachInterrupt(digitalPinToInterrupt(BUTTON_0), wakeMe, HIGH);
   //delay(100);
   //
   // Set sleep enable (SE) bit:
@@ -187,10 +187,11 @@ void sleepNow()
   Serial.println("Good morning");
   mode = MODE_ON;
 }
+
 void wakeMe()
 {
-  detachInterrupt(digitalPinToInterrupt(2));
-  attachInterrupt(digitalPinToInterrupt(2), wakeMe, HIGH);
+  detachInterrupt(digitalPinToInterrupt(BUTTON_0));
+  attachInterrupt(digitalPinToInterrupt(BUTTON_0), wakeMe, HIGH);
 }
 
 

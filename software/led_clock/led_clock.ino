@@ -2,11 +2,11 @@
   ===================================
   Led Matrix Clock
   A word clock and whatever you want!
-  https://github.com/issalig/lec-clock
+  https://github.com/issalig/ledclock
   ===================================
 
   file: led_clock.ino
-  description: led-clock
+  description: led clock
   date: 25/05/2014
   author: Ismael Salvador
 */
