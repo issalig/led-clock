@@ -24,7 +24,6 @@ int readDButton(int num) {
   return button;
 }
 
-
 void manage_buttons() {
   button_mode.read();
   button_set.read();
@@ -119,7 +118,6 @@ void manage_buttons() {
       //keep this while in set mode
       //exit mode after 5 seconds without activity
     }
-
   }
 
   if (button_set.isPressed()) {       
@@ -137,16 +135,16 @@ void manage_buttons() {
   }
 
   //timeout switch off
-  if (button_mode.releasedFor(60000) && button_set.releasedFor(60000) && cmdTimeout(60000)) { //60 secs
+  if (button_mode.releasedFor(60000) && button_set.releasedFor(60000) /*&& cmdTimeout(60000)*/) { //60 secs
     if (mode != MODE_OFF) {
 
       for (int index = 0; index < lc.getDeviceCount(); index++) {
         for (int i = 15; i > 0; i--) {
-          lc.setIntensity(index, i);
+          matrix_set_intensity(i, index); //lc.setIntensity(index, i);
           delay(200);
         }
         lc.clearDisplay(index);
-        lc.shutdown(index, true); //sleep
+        matrix_shutdown(index);//lc.shutdown(index, true); //sleep
       }
       mode = MODE_OFF;
       Serial.print("Auto off ");

@@ -112,12 +112,9 @@ void set_led_number_clock() {
   set_led_mask(m_month, cmonth - 1);
 }
 
-#endif
-
-
 void set_led_hex_clock() {
-  set_led_mask(hex_hour, chour % 12);
-  set_led_mask(m_min_unit, (cminute-5) % 10);
+  set_led_mask(hx_hour, chour % 12);
+  set_led_mask(hx_min, (cminute-5) % 10);
 
   if (csecond % 2)
     set_led_mask(hx_symbol, 2); //central point
@@ -129,7 +126,9 @@ void set_led_hex_clock() {
   //set_led_mask(m_moon, moon / 2); //0-7 phases
 
   //set_led_mask(m_arrow, csecond / 15);
-
-
 }
+#endif
+
+
+
 

@@ -373,7 +373,6 @@ void draw_matrix(int index, int intensity) {
   }
 }
 
-
 void draw_matrix_ws2812b(){
   int x, y, h;
   unsigned long time1;
@@ -391,6 +390,25 @@ void draw_matrix_ws2812b(){
           wsleds[h] = CRGB::Black;
     }
   FastLED.show();
+}
+
+void matrix_shutdown(int index){
+   if (USE_MATRIX_7219) {
+     for (int index = 0; index < lc.getDeviceCount(); index++)
+      lc.shutdown(index, false);
+   }
+   if (USE_WS2812B){
+    
+   }
+}
+
+void matrix_set_intensity(int i, int index){
+   if (USE_MATRIX_7219) {
+     for (int index = 0; index < lc.getDeviceCount(); index++)
+      lc.setIntensity(index, i);          
+   }
+   if (USE_WS2812B){    
+   }
 }
 
 void set_led_mask(const byte *mask, byte index) {
