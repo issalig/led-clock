@@ -7,7 +7,7 @@
 
 //matrix size
 #define MATRIX_ROWS 5//8
-#define MATRIX_COLS 5//8
+#define MATRIX_COLS 8//8
 
 //matrix type
 #define USE_COLS_PINS   0 //cols driven by pins
@@ -371,6 +371,8 @@ void draw_matrix(int index, int intensity) {
   if (USE_WS2812B){
     draw_matrix_ws2812b();
   }
+
+   print_hex_matrix();
 }
 
 //converts x,y to linear in hexagon
@@ -427,6 +429,66 @@ void matrix_set_intensity(int i, int index){
    }
    if (USE_WS2812B){    
    }
+}
+
+/*
+  print matrix on serial console
+*/
+void print_matrix() {
+  int x, y;
+  unsigned long time1;
+
+   //rows
+    for (y = 0; y < MATRIX_ROWS; y++) {
+      //columns
+      for (x = 0; x < MATRIX_COLS; x++){
+        if (raster[y][x]) {
+          Serial.print("*");
+        } else
+        Serial.print(".");
+      }
+      Serial.println("");
+    }
+}
+
+
+//converts x,y to linear in hexagon
+int hex_offset(int x, int y){  
+  int p=-1;
+  
+  switch(y){
+    case 0: p=2; break;
+    case 1: p=1; break;
+    case 2: p=0; break;
+    case 3: p=1; break;
+    case 4: p=2; break;
+  }
+
+  return p;
+}
+
+/*
+  print matrix on serial console
+*/
+void print_hex_matrix() {
+  int x, y;
+  unsigned long time1;
+
+   //rows
+    for (y = 0; y < MATRIX_ROWS; y++) {
+      for (x = 0; x < hex_offset(x,y); x++){
+        Serial.print(" ");
+      }
+      //columns
+      for (x = 0; x < MATRIX_ROWS -hex_offset(x,y); x++){
+        if (raster[y][x]) {
+          Serial.print("*");
+        } else
+        Serial.print("-");
+        Serial.print(" ");
+      }
+      Serial.println("");
+    }
 }
 
 void set_led_mask(const byte *mask, byte index) {

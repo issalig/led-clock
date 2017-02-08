@@ -21,6 +21,7 @@ void cmd_date(int arg_cnt, char **args)
 {
   if (arg_cnt > 1) {
     read_time();
+    Serial.println("Changing hour");
     cday = cmdStr2Num(args[3], 10);
     cmonth = cmdStr2Num(args[2], 10);
     cyear = cmdStr2Num(args[1], 10);
@@ -113,6 +114,9 @@ void cmd_alarm() { //int arg_cnt, char **args){
 
 void cmd_help(int arg_cnt, char **args) {
   Serial.println("LED CLOCK v.0.3 htpps://github.com/issalig/led-clock");
+  Serial.print("Compiled on ");
+  Serial.print(F(__DATE__));  Serial.print(" ");
+  Serial.println(F(__TIME__));
   Serial.println("----------------------------------------------------\n");
   Serial.println("on: Switch on");
   Serial.println("off: Switch off");

@@ -41,7 +41,7 @@
 
 #include "FastLED.h"
 
-#define DEBUG_SERIAL 0
+#define DEBUG_SERIAL 1//0
 
 //use eeprom for mask (saves ram space)
 #define USE_EEPROM
@@ -56,7 +56,7 @@
 #define USE_7219_C_ANODE   0
 
 #define USE_RTC         0//1
-#define USE_BUTTONS     1//1
+#define USE_BUTTONS     0//1
 #define USE_DHT11       0//1
 #define USER_SOFT_I2C   1
 
@@ -68,7 +68,7 @@ enum {SET_PLUS};
 int cyear, cmonth, cday, chour, cminute, csecond; //time
 double humidity, temperature, dew_point; //weather
 int moon; //moon
-long int refresh_delay = 60000; //refresh once a minute
+long int refresh_delay = 5000; //once a second 60000; //refresh once a minute
 int mode;
 int intensity = 8;
 long int last_refresh = 0;
@@ -124,19 +124,21 @@ void setup() {
 //let's go for a trip
 void loop() {
   if (mode == MODE_ON) {
-    if (1){ //if (millis() > (last_refresh + refresh_delay)) {
+    //if (1){ 
+    if (millis() > (last_refresh + refresh_delay)) {
       last_refresh = millis();
       read_time();
       fill_matrix(0);   //clear screen
       //if (!button_set.isPressed())
         draw_time();
+       print_debug_info();
     }
   }
   #if USE_BUTTONS 
   manage_buttons();
   #endif
   cmdPoll();
-  print_debug_info();
+  //print_debug_info();
   //weather_update();
 }
 

@@ -25,8 +25,9 @@ void setup_time(){
   }
 #else
   //should be only done if not rtc
-  //rtc.begin(DateTime(__DATE__, __TIME__));
-  rtc.begin(DateTime(F(__DATE__), F(__TIME__)));
+  rtc.begin(DateTime(__DATE__, __TIME__));
+  //rtc.begin(DateTime(F(__DATE__), F(__TIME__)));
+  
 #endif
 
 
@@ -46,7 +47,7 @@ void read_time() {
     csecond = dnow.second();
 
   }
-  /*
+  
     time_t t = now(); // Store the current time
     chour = hour(t);
     cminute = minute(t);
@@ -54,7 +55,7 @@ void read_time() {
     cyear = year(t);
     cmonth = month(t);
     cday = day(t);
-    csecond = second(t);*/
+    csecond = second(t);
 
 }
 
@@ -72,11 +73,13 @@ void draw_time() {
     //set_led_word_clock();
 
     //write leds for an amount of time
+    /*
     if (NUMBER_CLOCK)
       refresh_delay = 50;
     else if (WORD_CLOCK)
       refresh_delay = 50;
-
+    */
+    
     draw_matrix(0, intensity);
   }
 }

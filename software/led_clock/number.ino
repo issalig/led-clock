@@ -113,14 +113,27 @@ void set_led_number_clock() {
 }
 
 void set_led_hex_clock() {
-  set_led_mask(hx_hour, chour % 12);
-  set_led_mask(hx_min, cminute / 10);
+  //set_led_mask(hx_hour, chour % 12);
 
+  //TODO change it for real hour, min
+  set_led_mask(hx_hour, csecond % 12);
+
+  //even is for 5,15,... and only one led is lit
+  //odd is for 0,10, and two leds are lit
+  if ((csecond / 5) % 2) { 
+    set_led_mask(hx_min, (csecond / 10));
+  } else {
+    set_led_mask(hx_min, (csecond / 10));
+    set_led_mask(hx_min, ((csecond / 10)+(6-1))%6);
+  }
+  
+
+/*
   if (csecond % 2)
     set_led_mask(hx_symbol, 2); //central point
   else
     set_led_mask(hx_symbol, 1); //central point
-
+*/
     
   //set_led_number_weather();
   //set_led_number_dew_point();
