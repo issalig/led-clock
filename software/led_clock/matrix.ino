@@ -75,8 +75,8 @@ void init_matrix_pins() {
     }
   }
   if (USE_WS2812B){      
-      FastLED.addLeds<WS2812B, DATA_WS2812B, RGB>(wsleds, WS_NUM_LEDS);
-      FastLED.setBrightness( 64);//BRIGHTNESS );      
+      FastLED.addLeds<WS2812B, DATA_WS2812B, GRB>(wsleds, WS_NUM_LEDS).setCorrection( TypicalLEDStrip );;
+      FastLED.setBrightness( intensity);//BRIGHTNESS );      
   }
 }
 
@@ -369,7 +369,7 @@ void draw_matrix(int index, int intensity) {
     draw_matrix_7219(0);
   }
   if (USE_WS2812B){
-    draw_matrix_ws2812b();
+    draw_matrix_ws2812b();   
   }
 
    print_hex_matrix();
@@ -380,34 +380,39 @@ int rect2hex(int x, int y){
   int p=-1;
   
   switch(y){
-    case 0: if (x < 3) p=x; break;
-    case 1: if (x < 4) p=3+x; break;
-    case 2: if (x < 5) p=7+x; break;
-    case 3: if (x < 4) p=12+x; break;
-    case 4: if (x < 3) p=16+x; break;    
+    case 0: if (x < 3) p=x; break; //left to right
+    case 1: if (x < 4) p=6-x; break; //right to left
+    case 2: if (x < 5) p=7+x; break; //left to right
+    case 3: if (x < 4) p=15-x; break; //right to left
+    case 4: if (x < 3) p=16+x; break; //left to right
   }
 
+ // Serial.print(p); Serial.print(" ");
   return p;
 }
 
 void draw_matrix_ws2812b(){
   int x, y, h;
   unsigned long time1;
-
+ Serial.println("ws");
     //clear display
 
     //rows
     for (y = 0; y < MATRIX_ROWS; y++) {
       //columns
-      for (x = 0; x < MATRIX_COLS; x++)
-        h=rect2hex(x,y);
+      for (x = 0; x < MATRIX_COLS; x++){
+        h=rect2hex(x,y);       
         if(h>=0){
         if (raster[y][x]) {
-          wsleds[h] = CRGB::Green;
+          //int r,g,b;        
+          //hueToRgb((h*15)%360, &r,&g,&b);
+          wsleds[h] = CHSV( (h*15)%255, 255, 255); //CRGB::Green;          
         } else
           wsleds[h] = CRGB::Black;
       }
+      }
     }
+     Serial.println();
   FastLED.setBrightness(64);
   FastLED.show();
 }
@@ -428,6 +433,7 @@ void matrix_set_intensity(int i, int index){
       lc.setIntensity(index, i);          
    }
    if (USE_WS2812B){    
+      FastLED.setBrightness(i);
    }
 }
 
@@ -501,5 +507,14 @@ void set_led_mask(const byte *mask, byte index) {
     set_or_row(i,pgm_read_byte(mask + offset + i));
 #endif    
   }
+}
+
+int hueToRgb(int hue, int *r, int *g, int *b){
+  if ((hue >=0) && (hue < 60)) {*r=255; *g=hue * 255 / 60; b=0;}
+  else if ((hue >=60 ) && (hue < 120)) {*r= (120-hue) * 255 / 60; *g= 255; b=0; }
+  else if ((hue >=120) && (hue < 180))  {*r= 0;*g= 255;*b= (hue-120) * 255 / 60; }
+  else if ((hue >=180) && (hue < 240))  {*r=0; *g=(240-hue) * 255 / 60;*b= 255;}
+  else if ((hue >=240) && (hue < 300))  {*r=(hue-240) * 255 / 60;*g= 0;*b= 255;}
+  else if ((hue >=300) && (hue < 360))  {*r=255;*g=0;*b=(360-hue) * 255 / 60;}
 }
 

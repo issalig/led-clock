@@ -70,7 +70,7 @@ double humidity, temperature, dew_point; //weather
 int moon; //moon
 long int refresh_delay = 5000; //once a second 60000; //refresh once a minute
 int mode;
-int intensity = 8;
+int intensity = 100;//for WS ///8; for 7219
 long int last_refresh = 0;
 
 #if (USE_RTC)
