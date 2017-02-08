@@ -114,11 +114,14 @@ void set_led_number_clock() {
 
 void set_led_hex_clock() {
   set_led_mask(hx_hour, chour % 12);
-  set_led_mask(hx_min, (cminute-5) % 10);
+  set_led_mask(hx_min, cminute / 10);
 
   if (csecond % 2)
     set_led_mask(hx_symbol, 2); //central point
+  else
+    set_led_mask(hx_symbol, 1); //central point
 
+    
   //set_led_number_weather();
   //set_led_number_dew_point();
 

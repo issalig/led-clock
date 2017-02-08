@@ -136,7 +136,7 @@ void loop() {
   manage_buttons();
   #endif
   cmdPoll();
-  //print_debug_info();
-  weather_update();
+  print_debug_info();
+  //weather_update();
 }
 

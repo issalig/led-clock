@@ -76,7 +76,7 @@ void init_matrix_pins() {
   }
   if (USE_WS2812B){      
       FastLED.addLeds<WS2812B, DATA_WS2812B, RGB>(wsleds, WS_NUM_LEDS);
-      FastLED.setBrightness( BRIGHTNESS );      
+      FastLED.setBrightness( 64);//BRIGHTNESS );      
   }
 }
 
@@ -373,6 +373,21 @@ void draw_matrix(int index, int intensity) {
   }
 }
 
+//converts x,y to linear in hexagon
+int rect2hex(int x, int y){  
+  int p=-1;
+  
+  switch(y){
+    case 0: if (x < 3) p=x; break;
+    case 1: if (x < 4) p=3+x; break;
+    case 2: if (x < 5) p=7+x; break;
+    case 3: if (x < 4) p=12+x; break;
+    case 4: if (x < 3) p=16+x; break;    
+  }
+
+  return p;
+}
+
 void draw_matrix_ws2812b(){
   int x, y, h;
   unsigned long time1;
@@ -383,12 +398,15 @@ void draw_matrix_ws2812b(){
     for (y = 0; y < MATRIX_ROWS; y++) {
       //columns
       for (x = 0; x < MATRIX_COLS; x++)
-        h=y*MATRIX_COLS+x;
+        h=rect2hex(x,y);
+        if(h>=0){
         if (raster[y][x]) {
-          wsleds[h] = CRGB::Red;
+          wsleds[h] = CRGB::Green;
         } else
           wsleds[h] = CRGB::Black;
+      }
     }
+  FastLED.setBrightness(64);
   FastLED.show();
 }
 

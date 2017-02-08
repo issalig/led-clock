@@ -25,7 +25,8 @@ void setup_time(){
   }
 #else
   //should be only done if not rtc
-  rtc.begin(DateTime(__DATE__, __TIME__));
+  //rtc.begin(DateTime(__DATE__, __TIME__));
+  rtc.begin(DateTime(F(__DATE__), F(__TIME__)));
 #endif
 
 
@@ -61,14 +62,12 @@ void draw_time() {
   if (mode != MODE_OFF) {
     
       #if (NUMBER_CLOCK)
-        set_led_number_clock();
+        //set_led_number_clock();
+        set_led_hex_clock();
       #endif
       #if (WORD_CLOCK)
         set_led_word_clock();
-      #endif     
-      #if (HEX_CLOCK)
-        set_led_hex_clock();
-      #endif
+      #endif          
     
     //set_led_word_clock();
 
